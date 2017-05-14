@@ -11775,7 +11775,7 @@ div#notebook {
 
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[59]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
@@ -11789,7 +11789,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[60]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="ch">#!/usr/bin/python</span>
@@ -11824,11 +11824,32 @@ div#notebook {
 <span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">GradientBoostingClassifier</span>
 <span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">LinearSVC</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">StratifiedShuffleSplit</span>
-
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">AdaBoostClassifier</span>
 <span class="kn">from</span> <span class="nn">tester</span> <span class="kn">import</span> <span class="n">test_classifier</span>
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>C:\Users\agdje\Anaconda2\lib\site-packages\sklearn\cross_validation.py:44: DeprecationWarning:
+
+This module was deprecated in version 0.18 in favor of the model_selection module into which all the refactored classes and functions are moved. Also note that the interface of the new CV iterators are different from that of this module. This module will be removed in 0.20.
+
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -12166,12 +12187,15 @@ div#notebook {
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">persons_of_interest</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">data_dict</span> <span class="k">if</span> <span class="n">data_dict</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="s1">&#39;poi&#39;</span><span class="p">]]</span>
 
 <span class="c1">#known issue in this data -- email list is restricted to persons of interest who worked for Enron</span>
-<span class="k">print</span> <span class="s1">&#39;persons of interest: {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">persons_of_interest</span><span class="p">))</span>
 <span class="n">poi_names</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../final_project/poi_names.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;\s+&quot;</span><span class="p">)</span>
+<span class="k">print</span> <span class="s1">&#39;named persons of interest: {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">poi_names</span><span class="p">))</span>
 
 <span class="k">print</span><span class="p">(</span>
     <span class="s1">&#39;There are {0} persons in the data, {1} or {2:.2f}% are persons of interest.&#39;</span>
-<span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">poi_names</span><span class="p">),</span> <span class="mf">100.</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">poi_names</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
+<span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">persons_of_interest</span><span class="p">),</span> <span class="mf">100.</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">persons_of_interest</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
+
+<span class="k">print</span> <span class="p">(</span><span class="s1">&#39;In other words, there are {0} persons total, {1} persons of interest, and {2} who are not persons of interest.&#39;</span>
+<span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">persons_of_interest</span><span class="p">),</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">persons_of_interest</span><span class="p">)))</span>
 </pre></div>
 
 </div>
@@ -12186,8 +12210,9 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>persons of interest: 18
-There are 146 persons in the data, 35 or 23.97% are persons of interest.
+<pre>named persons of interest: 35
+There are 146 persons in the data, 18 or 12.33% are persons of interest.
+In other words, there are 146 persons total, 18 persons of interest, and 128 who are not persons of interest.
 </pre>
 </div>
 </div>
@@ -12255,6 +12280,1536 @@ total_stock_value NaN values: 20 people = 13.70%
 <div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#Add the employee names into the pandas dataframe</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">employees</span><span class="p">,</span> <span class="n">df</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s2">&quot;employee_name&quot;</span><span class="p">})</span>
+
+<span class="n">df</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt output_prompt">Out[9]:</div>
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>employee_name</th>
+      <th>bonus</th>
+      <th>deferral_payments</th>
+      <th>deferred_income</th>
+      <th>director_fees</th>
+      <th>email_address</th>
+      <th>exercised_stock_options</th>
+      <th>expenses</th>
+      <th>from_messages</th>
+      <th>from_poi_to_this_person</th>
+      <th>...</th>
+      <th>long_term_incentive</th>
+      <th>other</th>
+      <th>poi</th>
+      <th>restricted_stock</th>
+      <th>restricted_stock_deferred</th>
+      <th>salary</th>
+      <th>shared_receipt_with_poi</th>
+      <th>to_messages</th>
+      <th>total_payments</th>
+      <th>total_stock_value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>METTS MARK</td>
+      <td>600000.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>mark.metts@enron.com</td>
+      <td>NaN</td>
+      <td>94299.0</td>
+      <td>29.0</td>
+      <td>38.0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>1740.0</td>
+      <td>False</td>
+      <td>585062.0</td>
+      <td>NaN</td>
+      <td>365788.0</td>
+      <td>702.0</td>
+      <td>807.0</td>
+      <td>1061827.0</td>
+      <td>585062.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>BAXTER JOHN C</td>
+      <td>1200000.0</td>
+      <td>1295738.0</td>
+      <td>-1386055.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>6680544.0</td>
+      <td>11200.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>1586055.0</td>
+      <td>2660303.0</td>
+      <td>False</td>
+      <td>3942714.0</td>
+      <td>NaN</td>
+      <td>267102.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5634343.0</td>
+      <td>10623258.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>ELLIOTT STEVEN</td>
+      <td>350000.0</td>
+      <td>NaN</td>
+      <td>-400729.0</td>
+      <td>NaN</td>
+      <td>steven.elliott@enron.com</td>
+      <td>4890344.0</td>
+      <td>78552.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>12961.0</td>
+      <td>False</td>
+      <td>1788391.0</td>
+      <td>NaN</td>
+      <td>170941.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>211725.0</td>
+      <td>6678735.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>CORDES WILLIAM R</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>bill.cordes@enron.com</td>
+      <td>651850.0</td>
+      <td>NaN</td>
+      <td>12.0</td>
+      <td>10.0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>False</td>
+      <td>386335.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>58.0</td>
+      <td>764.0</td>
+      <td>NaN</td>
+      <td>1038185.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>HANNON KEVIN P</td>
+      <td>1500000.0</td>
+      <td>NaN</td>
+      <td>-3117011.0</td>
+      <td>NaN</td>
+      <td>kevin.hannon@enron.com</td>
+      <td>5538001.0</td>
+      <td>34039.0</td>
+      <td>32.0</td>
+      <td>32.0</td>
+      <td>...</td>
+      <td>1617011.0</td>
+      <td>11350.0</td>
+      <td>True</td>
+      <td>853064.0</td>
+      <td>NaN</td>
+      <td>243293.0</td>
+      <td>1035.0</td>
+      <td>1045.0</td>
+      <td>288682.0</td>
+      <td>6391065.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>MORDAUNT KRISTINA M</td>
+      <td>325000.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>kristina.mordaunt@enron.com</td>
+      <td>NaN</td>
+      <td>35018.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>1411.0</td>
+      <td>False</td>
+      <td>208510.0</td>
+      <td>NaN</td>
+      <td>267093.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>628522.0</td>
+      <td>208510.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>MEYER ROCKFORD G</td>
+      <td>NaN</td>
+      <td>1848227.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>rockford.meyer@enron.com</td>
+      <td>493489.0</td>
+      <td>NaN</td>
+      <td>28.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>False</td>
+      <td>462384.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>22.0</td>
+      <td>232.0</td>
+      <td>1848227.0</td>
+      <td>955873.0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>MCMAHON JEFFREY</td>
+      <td>2600000.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>jeffrey.mcmahon@enron.com</td>
+      <td>1104054.0</td>
+      <td>137108.0</td>
+      <td>48.0</td>
+      <td>58.0</td>
+      <td>...</td>
+      <td>694862.0</td>
+      <td>297353.0</td>
+      <td>False</td>
+      <td>558801.0</td>
+      <td>NaN</td>
+      <td>370448.0</td>
+      <td>2228.0</td>
+      <td>2355.0</td>
+      <td>4099771.0</td>
+      <td>1662855.0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>HORTON STANLEY C</td>
+      <td>NaN</td>
+      <td>3131860.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>stanley.horton@enron.com</td>
+      <td>5210569.0</td>
+      <td>NaN</td>
+      <td>1073.0</td>
+      <td>44.0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>False</td>
+      <td>2046079.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1074.0</td>
+      <td>2350.0</td>
+      <td>3131860.0</td>
+      <td>7256648.0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>PIPER GREGORY F</td>
+      <td>400000.0</td>
+      <td>1130036.0</td>
+      <td>-33333.0</td>
+      <td>NaN</td>
+      <td>greg.piper@enron.com</td>
+      <td>880290.0</td>
+      <td>43057.0</td>
+      <td>222.0</td>
+      <td>61.0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>778.0</td>
+      <td>False</td>
+      <td>409554.0</td>
+      <td>-409554.0</td>
+      <td>197091.0</td>
+      <td>742.0</td>
+      <td>1238.0</td>
+      <td>1737629.0</td>
+      <td>880290.0</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>HUMPHREY GENE E</td>
+      <td>NaN</td>
+      <td>2964506.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>gene.humphrey@enron.com</td>
+      <td>2282768.0</td>
+      <td>4994.0</td>
+      <td>17.0</td>
+      <td>10.0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>False</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>130724.0</td>
+      <td>119.0</td>
+      <td>128.0</td>
+      <td>3100224.0</td>
+      <td>2282768.0</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>UMANOFF ADAM S</td>
+      <td>788750.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>adam.umanoff@enron.com</td>
+      <td>NaN</td>
+      <td>53122.0</td>
+      <td>18.0</td>
+      <td>12.0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>False</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>288589.0</td>
+      <td>41.0</td>
+      <td>111.0</td>
+      <td>1130461.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>BLACHMAN JEREMY M</td>
+      <td>850000.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>jeremy.blachman@enron.com</td>
+      <td>765313.0</td>
+      <td>84208.0</td>
+      <td>14.0</td>
+      <td>25.0</td>
+      <td>...</td>
+      <td>831809.0</td>
+      <td>272.0</td>
+      <td>False</td>
+      <td>189041.0</td>
+      <td>NaN</td>
+      <td>248546.0</td>
+      <td>2326.0</td>
+      <td>2475.0</td>
+      <td>2014835.0</td>
+      <td>954354.0</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>SUNDE MARTIN</td>
+      <td>700000.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>marty.sunde@enron.com</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>38.0</td>
+      <td>37.0</td>
+      <td>...</td>
+      <td>476451.0</td>
+      <td>111122.0</td>
+      <td>False</td>
+      <td>698920.0</td>
+      <td>NaN</td>
+      <td>257486.0</td>
+      <td>2565.0</td>
+      <td>2647.0</td>
+      <td>1545059.0</td>
+      <td>698920.0</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>GIBBS DANA R</td>
+      <td>NaN</td>
+      <td>504610.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>dana.gibbs@enron.com</td>
+      <td>2218275.0</td>
+      <td>NaN</td>
+      <td>12.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>461912.0</td>
+      <td>NaN</td>
+      <td>False</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>23.0</td>
+      <td>169.0</td>
+      <td>966522.0</td>
+      <td>2218275.0</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>LOWRY CHARLES P</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>372205.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>False</td>
+      <td>153686.0</td>
+      <td>-153686.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>372205.0</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>COLWELL WESLEY</td>
+      <td>1200000.0</td>
+      <td>27610.0</td>
+      <td>-144062.0</td>
+      <td>NaN</td>
+      <td>wes.colwell@enron.com</td>
+      <td>NaN</td>
+      <td>16514.0</td>
+      <td>40.0</td>
+      <td>240.0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>101740.0</td>
+      <td>True</td>
+      <td>698242.0</td>
+      <td>NaN</td>
+      <td>288542.0</td>
+      <td>1132.0</td>
+      <td>1758.0</td>
+      <td>1490344.0</td>
+      <td>698242.0</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>MULLER MARK S</td>
+      <td>1100000.0</td>
+      <td>842924.0</td>
+      <td>-719000.0</td>
+      <td>NaN</td>
+      <td>s..muller@enron.com</td>
+      <td>1056320.0</td>
+      <td>NaN</td>
+      <td>16.0</td>
+      <td>12.0</td>
+      <td>...</td>
+      <td>1725545.0</td>
+      <td>947.0</td>
+      <td>False</td>
+      <td>360528.0</td>
+      <td>NaN</td>
+      <td>251654.0</td>
+      <td>114.0</td>
+      <td>136.0</td>
+      <td>3202070.0</td>
+      <td>1416848.0</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>JACKSON CHARLENE R</td>
+      <td>250000.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>charlene.jackson@enron.com</td>
+      <td>185063.0</td>
+      <td>10181.0</td>
+      <td>56.0</td>
+      <td>25.0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>2435.0</td>
+      <td>False</td>
+      <td>540672.0</td>
+      <td>NaN</td>
+      <td>288558.0</td>
+      <td>117.0</td>
+      <td>258.0</td>
+      <td>551174.0</td>
+      <td>725735.0</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>WESTFAHL RICHARD K</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>-10800.0</td>
+      <td>NaN</td>
+      <td>dick.westfahl@enron.com</td>
+      <td>NaN</td>
+      <td>51870.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>256191.0</td>
+      <td>401130.0</td>
+      <td>False</td>
+      <td>384930.0</td>
+      <td>NaN</td>
+      <td>63744.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>762135.0</td>
+      <td>384930.0</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>WALTERS GARETH W</td>
+      <td>NaN</td>
+      <td>53625.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1030329.0</td>
+      <td>33785.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>False</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>87410.0</td>
+      <td>1030329.0</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>WALLS JR ROBERT H</td>
+      <td>850000.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>rob.walls@enron.com</td>
+      <td>4346544.0</td>
+      <td>50936.0</td>
+      <td>146.0</td>
+      <td>17.0</td>
+      <td>...</td>
+      <td>540751.0</td>
+      <td>2.0</td>
+      <td>False</td>
+      <td>1552453.0</td>
+      <td>NaN</td>
+      <td>357091.0</td>
+      <td>215.0</td>
+      <td>671.0</td>
+      <td>1798780.0</td>
+      <td>5898997.0</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>KITCHEN LOUISE</td>
+      <td>3100000.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>louise.kitchen@enron.com</td>
+      <td>81042.0</td>
+      <td>5774.0</td>
+      <td>1728.0</td>
+      <td>251.0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>93925.0</td>
+      <td>False</td>
+      <td>466101.0</td>
+      <td>NaN</td>
+      <td>271442.0</td>
+      <td>3669.0</td>
+      <td>8305.0</td>
+      <td>3471141.0</td>
+      <td>547143.0</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>CHAN RONNIE</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>-98784.0</td>
+      <td>98784.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>False</td>
+      <td>32460.0</td>
+      <td>-32460.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>BELFER ROBERT</td>
+      <td>NaN</td>
+      <td>-102500.0</td>
+      <td>NaN</td>
+      <td>3285.0</td>
+      <td>NaN</td>
+      <td>3285.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>False</td>
+      <td>NaN</td>
+      <td>44093.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>102500.0</td>
+      <td>-44093.0</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>SHANKMAN JEFFREY A</td>
+      <td>2000000.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>jeffrey.shankman@enron.com</td>
+      <td>1441898.0</td>
+      <td>178979.0</td>
+      <td>2681.0</td>
+      <td>94.0</td>
+      <td>...</td>
+      <td>554422.0</td>
+      <td>1191.0</td>
+      <td>False</td>
+      <td>630137.0</td>
+      <td>NaN</td>
+      <td>304110.0</td>
+      <td>1730.0</td>
+      <td>3221.0</td>
+      <td>3038702.0</td>
+      <td>2072035.0</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>WODRASKA JOHN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>john.wodraska@enron.com</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>189583.0</td>
+      <td>False</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>189583.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>BERGSIEKER RICHARD P</td>
+      <td>250000.0</td>
+      <td>NaN</td>
+      <td>-485813.0</td>
+      <td>NaN</td>
+      <td>rick.bergsieker@enron.com</td>
+      <td>NaN</td>
+      <td>59175.0</td>
+      <td>59.0</td>
+      <td>4.0</td>
+      <td>...</td>
+      <td>180250.0</td>
+      <td>427316.0</td>
+      <td>False</td>
+      <td>659249.0</td>
+      <td>NaN</td>
+      <td>187922.0</td>
+      <td>233.0</td>
+      <td>383.0</td>
+      <td>618850.0</td>
+      <td>659249.0</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>URQUHART JOHN A</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>-36666.0</td>
+      <td>36666.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>228656.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>False</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>228656.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>BIBI PHILIPPE A</td>
+      <td>1000000.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>philippe.bibi@enron.com</td>
+      <td>1465734.0</td>
+      <td>38559.0</td>
+      <td>40.0</td>
+      <td>23.0</td>
+      <td>...</td>
+      <td>369721.0</td>
+      <td>425688.0</td>
+      <td>False</td>
+      <td>378082.0</td>
+      <td>NaN</td>
+      <td>213625.0</td>
+      <td>1336.0</td>
+      <td>1607.0</td>
+      <td>2047593.0</td>
+      <td>1843816.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>116</th>
+      <td>REYNOLDS LAWRENCE</td>
+      <td>100000.0</td>
+      <td>51365.0</td>
+      <td>-200000.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>4160672.0</td>
+      <td>8409.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>156250.0</td>
+      <td>202052.0</td>
+      <td>False</td>
+      <td>201483.0</td>
+      <td>-140264.0</td>
+      <td>76399.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>394475.0</td>
+      <td>4221891.0</td>
+    </tr>
+    <tr>
+      <th>117</th>
+      <td>DIMICHELE RICHARD G</td>
+      <td>1000000.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>richard.dimichele@enron.com</td>
+      <td>8191755.0</td>
+      <td>35812.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>694862.0</td>
+      <td>374689.0</td>
+      <td>False</td>
+      <td>126027.0</td>
+      <td>NaN</td>
+      <td>262788.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2368151.0</td>
+      <td>8317782.0</td>
+    </tr>
+    <tr>
+      <th>118</th>
+      <td>BHATNAGAR SANJAY</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>137864.0</td>
+      <td>sanjay.bhatnagar@enron.com</td>
+      <td>2604490.0</td>
+      <td>NaN</td>
+      <td>29.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>137864.0</td>
+      <td>False</td>
+      <td>-2604490.0</td>
+      <td>15456290.0</td>
+      <td>NaN</td>
+      <td>463.0</td>
+      <td>523.0</td>
+      <td>15456290.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>119</th>
+      <td>CARTER REBECCA C</td>
+      <td>300000.0</td>
+      <td>NaN</td>
+      <td>-159792.0</td>
+      <td>NaN</td>
+      <td>rebecca.carter@enron.com</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>15.0</td>
+      <td>29.0</td>
+      <td>...</td>
+      <td>75000.0</td>
+      <td>540.0</td>
+      <td>False</td>
+      <td>307301.0</td>
+      <td>-307301.0</td>
+      <td>261809.0</td>
+      <td>196.0</td>
+      <td>312.0</td>
+      <td>477557.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>120</th>
+      <td>BUCHANAN HAROLD G</td>
+      <td>500000.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>john.buchanan@enron.com</td>
+      <td>825464.0</td>
+      <td>600.0</td>
+      <td>125.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>304805.0</td>
+      <td>1215.0</td>
+      <td>False</td>
+      <td>189041.0</td>
+      <td>NaN</td>
+      <td>248017.0</td>
+      <td>23.0</td>
+      <td>1088.0</td>
+      <td>1054637.0</td>
+      <td>1014505.0</td>
+    </tr>
+    <tr>
+      <th>121</th>
+      <td>YEAP SOON</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>192758.0</td>
+      <td>55097.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>False</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>55097.0</td>
+      <td>192758.0</td>
+    </tr>
+    <tr>
+      <th>122</th>
+      <td>MURRAY JULIA H</td>
+      <td>400000.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>julia.murray@enron.com</td>
+      <td>400478.0</td>
+      <td>57580.0</td>
+      <td>45.0</td>
+      <td>11.0</td>
+      <td>...</td>
+      <td>125000.0</td>
+      <td>330.0</td>
+      <td>False</td>
+      <td>196983.0</td>
+      <td>NaN</td>
+      <td>229284.0</td>
+      <td>395.0</td>
+      <td>2192.0</td>
+      <td>812194.0</td>
+      <td>597461.0</td>
+    </tr>
+    <tr>
+      <th>123</th>
+      <td>GARLAND C KEVIN</td>
+      <td>850000.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>kevin.garland@enron.com</td>
+      <td>636246.0</td>
+      <td>48405.0</td>
+      <td>44.0</td>
+      <td>10.0</td>
+      <td>...</td>
+      <td>375304.0</td>
+      <td>60814.0</td>
+      <td>False</td>
+      <td>259907.0</td>
+      <td>NaN</td>
+      <td>231946.0</td>
+      <td>178.0</td>
+      <td>209.0</td>
+      <td>1566469.0</td>
+      <td>896153.0</td>
+    </tr>
+    <tr>
+      <th>124</th>
+      <td>DODSON KEITH</td>
+      <td>70000.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>keith.dodson@enron.com</td>
+      <td>NaN</td>
+      <td>28164.0</td>
+      <td>14.0</td>
+      <td>10.0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>774.0</td>
+      <td>False</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>221003.0</td>
+      <td>114.0</td>
+      <td>176.0</td>
+      <td>319941.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>125</th>
+      <td>YEAGER F SCOTT</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>scott.yeager@enron.com</td>
+      <td>8308552.0</td>
+      <td>53947.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>147950.0</td>
+      <td>True</td>
+      <td>3576206.0</td>
+      <td>NaN</td>
+      <td>158403.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>360300.0</td>
+      <td>11884758.0</td>
+    </tr>
+    <tr>
+      <th>126</th>
+      <td>HIRKO JOSEPH</td>
+      <td>NaN</td>
+      <td>10259.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>joe.hirko@enron.com</td>
+      <td>30766064.0</td>
+      <td>77978.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>2856.0</td>
+      <td>True</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>91093.0</td>
+      <td>30766064.0</td>
+    </tr>
+    <tr>
+      <th>127</th>
+      <td>DIETRICH JANET R</td>
+      <td>600000.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>janet.dietrich@enron.com</td>
+      <td>1550019.0</td>
+      <td>3475.0</td>
+      <td>63.0</td>
+      <td>305.0</td>
+      <td>...</td>
+      <td>556416.0</td>
+      <td>473.0</td>
+      <td>False</td>
+      <td>315068.0</td>
+      <td>NaN</td>
+      <td>250100.0</td>
+      <td>1902.0</td>
+      <td>2572.0</td>
+      <td>1410464.0</td>
+      <td>1865087.0</td>
+    </tr>
+    <tr>
+      <th>128</th>
+      <td>DERRICK JR. JAMES V</td>
+      <td>800000.0</td>
+      <td>NaN</td>
+      <td>-1284000.0</td>
+      <td>NaN</td>
+      <td>james.derrick@enron.com</td>
+      <td>8831913.0</td>
+      <td>51124.0</td>
+      <td>909.0</td>
+      <td>64.0</td>
+      <td>...</td>
+      <td>484000.0</td>
+      <td>7482.0</td>
+      <td>False</td>
+      <td>1787380.0</td>
+      <td>-1787380.0</td>
+      <td>492375.0</td>
+      <td>1401.0</td>
+      <td>2181.0</td>
+      <td>550981.0</td>
+      <td>8831913.0</td>
+    </tr>
+    <tr>
+      <th>129</th>
+      <td>FREVERT MARK A</td>
+      <td>2000000.0</td>
+      <td>6426990.0</td>
+      <td>-3367011.0</td>
+      <td>NaN</td>
+      <td>mark.frevert@enron.com</td>
+      <td>10433518.0</td>
+      <td>86987.0</td>
+      <td>21.0</td>
+      <td>242.0</td>
+      <td>...</td>
+      <td>1617011.0</td>
+      <td>7427621.0</td>
+      <td>False</td>
+      <td>4188667.0</td>
+      <td>NaN</td>
+      <td>1060932.0</td>
+      <td>2979.0</td>
+      <td>3275.0</td>
+      <td>17252530.0</td>
+      <td>14622185.0</td>
+    </tr>
+    <tr>
+      <th>130</th>
+      <td>PAI LOU L</td>
+      <td>1000000.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>lou.pai@enron.com</td>
+      <td>15364167.0</td>
+      <td>32047.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>1829457.0</td>
+      <td>False</td>
+      <td>8453763.0</td>
+      <td>NaN</td>
+      <td>261879.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>3123383.0</td>
+      <td>23817930.0</td>
+    </tr>
+    <tr>
+      <th>131</th>
+      <td>BAY FRANKLIN R</td>
+      <td>400000.0</td>
+      <td>260455.0</td>
+      <td>-201641.0</td>
+      <td>NaN</td>
+      <td>frank.bay@enron.com</td>
+      <td>NaN</td>
+      <td>129142.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>69.0</td>
+      <td>False</td>
+      <td>145796.0</td>
+      <td>-82782.0</td>
+      <td>239671.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>827696.0</td>
+      <td>63014.0</td>
+    </tr>
+    <tr>
+      <th>132</th>
+      <td>HAYSLETT RODERICK J</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>rod.hayslett@enron.com</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1061.0</td>
+      <td>35.0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>False</td>
+      <td>346663.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>571.0</td>
+      <td>2649.0</td>
+      <td>NaN</td>
+      <td>346663.0</td>
+    </tr>
+    <tr>
+      <th>133</th>
+      <td>FUGH JOHN L</td>
+      <td>NaN</td>
+      <td>50591.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>176378.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>False</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>50591.0</td>
+      <td>176378.0</td>
+    </tr>
+    <tr>
+      <th>134</th>
+      <td>FALLON JAMES B</td>
+      <td>2500000.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>jim.fallon@enron.com</td>
+      <td>940257.0</td>
+      <td>95924.0</td>
+      <td>75.0</td>
+      <td>42.0</td>
+      <td>...</td>
+      <td>374347.0</td>
+      <td>401481.0</td>
+      <td>False</td>
+      <td>1392142.0</td>
+      <td>NaN</td>
+      <td>304588.0</td>
+      <td>1604.0</td>
+      <td>1755.0</td>
+      <td>3676340.0</td>
+      <td>2332399.0</td>
+    </tr>
+    <tr>
+      <th>135</th>
+      <td>KOENIG MARK E</td>
+      <td>700000.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>mark.koenig@enron.com</td>
+      <td>671737.0</td>
+      <td>127017.0</td>
+      <td>61.0</td>
+      <td>53.0</td>
+      <td>...</td>
+      <td>300000.0</td>
+      <td>150458.0</td>
+      <td>True</td>
+      <td>1248318.0</td>
+      <td>NaN</td>
+      <td>309946.0</td>
+      <td>2271.0</td>
+      <td>2374.0</td>
+      <td>1587421.0</td>
+      <td>1920055.0</td>
+    </tr>
+    <tr>
+      <th>136</th>
+      <td>SAVAGE FRANK</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>-121284.0</td>
+      <td>125034.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>False</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>3750.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>137</th>
+      <td>IZZO LAWRENCE L</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>larry.izzo@enron.com</td>
+      <td>2165172.0</td>
+      <td>28093.0</td>
+      <td>19.0</td>
+      <td>28.0</td>
+      <td>...</td>
+      <td>312500.0</td>
+      <td>1553729.0</td>
+      <td>False</td>
+      <td>3654808.0</td>
+      <td>NaN</td>
+      <td>85274.0</td>
+      <td>437.0</td>
+      <td>496.0</td>
+      <td>1979596.0</td>
+      <td>5819980.0</td>
+    </tr>
+    <tr>
+      <th>138</th>
+      <td>TILNEY ELIZABETH A</td>
+      <td>300000.0</td>
+      <td>NaN</td>
+      <td>-575000.0</td>
+      <td>NaN</td>
+      <td>elizabeth.tilney@enron.com</td>
+      <td>591250.0</td>
+      <td>NaN</td>
+      <td>19.0</td>
+      <td>10.0</td>
+      <td>...</td>
+      <td>275000.0</td>
+      <td>152055.0</td>
+      <td>False</td>
+      <td>576792.0</td>
+      <td>NaN</td>
+      <td>247338.0</td>
+      <td>379.0</td>
+      <td>460.0</td>
+      <td>399393.0</td>
+      <td>1168042.0</td>
+    </tr>
+    <tr>
+      <th>139</th>
+      <td>MARTIN AMANDA K</td>
+      <td>NaN</td>
+      <td>85430.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>a..martin@enron.com</td>
+      <td>2070306.0</td>
+      <td>8211.0</td>
+      <td>230.0</td>
+      <td>8.0</td>
+      <td>...</td>
+      <td>5145434.0</td>
+      <td>2818454.0</td>
+      <td>False</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>349487.0</td>
+      <td>477.0</td>
+      <td>1522.0</td>
+      <td>8407016.0</td>
+      <td>2070306.0</td>
+    </tr>
+    <tr>
+      <th>140</th>
+      <td>BUY RICHARD B</td>
+      <td>900000.0</td>
+      <td>649584.0</td>
+      <td>-694862.0</td>
+      <td>NaN</td>
+      <td>rick.buy@enron.com</td>
+      <td>2542813.0</td>
+      <td>NaN</td>
+      <td>1053.0</td>
+      <td>156.0</td>
+      <td>...</td>
+      <td>769862.0</td>
+      <td>400572.0</td>
+      <td>False</td>
+      <td>901657.0</td>
+      <td>NaN</td>
+      <td>330546.0</td>
+      <td>2333.0</td>
+      <td>3523.0</td>
+      <td>2355702.0</td>
+      <td>3444470.0</td>
+    </tr>
+    <tr>
+      <th>141</th>
+      <td>GRAMM WENDY L</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>119292.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>False</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>119292.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>142</th>
+      <td>CAUSEY RICHARD A</td>
+      <td>1000000.0</td>
+      <td>NaN</td>
+      <td>-235000.0</td>
+      <td>NaN</td>
+      <td>richard.causey@enron.com</td>
+      <td>NaN</td>
+      <td>30674.0</td>
+      <td>49.0</td>
+      <td>58.0</td>
+      <td>...</td>
+      <td>350000.0</td>
+      <td>307895.0</td>
+      <td>True</td>
+      <td>2502063.0</td>
+      <td>NaN</td>
+      <td>415189.0</td>
+      <td>1585.0</td>
+      <td>1892.0</td>
+      <td>1868758.0</td>
+      <td>2502063.0</td>
+    </tr>
+    <tr>
+      <th>143</th>
+      <td>TAYLOR MITCHELL S</td>
+      <td>600000.0</td>
+      <td>227449.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>mitchell.taylor@enron.com</td>
+      <td>3181250.0</td>
+      <td>NaN</td>
+      <td>29.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>False</td>
+      <td>563798.0</td>
+      <td>NaN</td>
+      <td>265214.0</td>
+      <td>300.0</td>
+      <td>533.0</td>
+      <td>1092663.0</td>
+      <td>3745048.0</td>
+    </tr>
+    <tr>
+      <th>144</th>
+      <td>DONAHUE JR JEFFREY M</td>
+      <td>800000.0</td>
+      <td>NaN</td>
+      <td>-300000.0</td>
+      <td>NaN</td>
+      <td>jeff.donahue@enron.com</td>
+      <td>765920.0</td>
+      <td>96268.0</td>
+      <td>22.0</td>
+      <td>188.0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>891.0</td>
+      <td>False</td>
+      <td>315068.0</td>
+      <td>NaN</td>
+      <td>278601.0</td>
+      <td>772.0</td>
+      <td>865.0</td>
+      <td>875760.0</td>
+      <td>1080988.0</td>
+    </tr>
+    <tr>
+      <th>145</th>
+      <td>GLISAN JR BEN F</td>
+      <td>600000.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>ben.glisan@enron.com</td>
+      <td>384728.0</td>
+      <td>125978.0</td>
+      <td>16.0</td>
+      <td>52.0</td>
+      <td>...</td>
+      <td>71023.0</td>
+      <td>200308.0</td>
+      <td>True</td>
+      <td>393818.0</td>
+      <td>NaN</td>
+      <td>274975.0</td>
+      <td>874.0</td>
+      <td>873.0</td>
+      <td>1272284.0</td>
+      <td>778546.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>146 rows × 22 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#Let&#39;s see how compensation &#39;balances&#39; horizontally, so we know which stock options have the richest information.</span>
 <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">:</span>
     <span class="k">if</span> <span class="s1">&#39;stock&#39;</span> <span class="ow">in</span> <span class="n">col</span><span class="p">:</span>
@@ -12297,7 +13852,7 @@ The balanced stock data is: -15547761.0, we would expect zero.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#Who in the data has a line that isn&#39;t balancing?</span>
@@ -12316,7 +13871,7 @@ The balanced stock data is: -15547761.0, we would expect zero.
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[10]:</div>
+<div class="prompt output_prompt">Out[11]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -12325,6 +13880,7 @@ The balanced stock data is: -15547761.0, we would expect zero.
   <thead>
     <tr style="text-align: right;">
       <th></th>
+      <th>employee_name</th>
       <th>bonus</th>
       <th>deferral_payments</th>
       <th>deferred_income</th>
@@ -12334,7 +13890,6 @@ The balanced stock data is: -15547761.0, we would expect zero.
       <th>expenses</th>
       <th>from_messages</th>
       <th>from_poi_to_this_person</th>
-      <th>from_this_person_to_poi</th>
       <th>...</th>
       <th>long_term_incentive</th>
       <th>other</th>
@@ -12351,13 +13906,13 @@ The balanced stock data is: -15547761.0, we would expect zero.
   <tbody>
     <tr>
       <th>24</th>
+      <td>BELFER ROBERT</td>
       <td>NaN</td>
       <td>-102500.0</td>
       <td>NaN</td>
       <td>3285.0</td>
       <td>NaN</td>
       <td>3285.0</td>
-      <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
@@ -12375,6 +13930,7 @@ The balanced stock data is: -15547761.0, we would expect zero.
     </tr>
     <tr>
       <th>118</th>
+      <td>BHATNAGAR SANJAY</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
@@ -12384,7 +13940,6 @@ The balanced stock data is: -15547761.0, we would expect zero.
       <td>NaN</td>
       <td>29.0</td>
       <td>0.0</td>
-      <td>1.0</td>
       <td>...</td>
       <td>NaN</td>
       <td>137864.0</td>
@@ -12399,42 +13954,10 @@ The balanced stock data is: -15547761.0, we would expect zero.
     </tr>
   </tbody>
 </table>
-<p>2 rows × 21 columns</p>
+<p>2 rows × 22 columns</p>
 </div>
 </div>
 
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#And their names?</span>
-<span class="k">print</span> <span class="n">employees</span><span class="p">[</span><span class="mi">24</span><span class="p">]</span>
-<span class="k">print</span> <span class="n">employees</span><span class="p">[</span><span class="mi">118</span><span class="p">]</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-<div class="prompt"></div>
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>BELFER ROBERT
-BHATNAGAR SANJAY
-</pre>
-</div>
 </div>
 
 </div>
@@ -12614,6 +14137,21 @@ The balanced stock data is now: 0.0, we would expect zero.
 <div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#Because the data was gathered as part of a lawsuit, we can safely assume that any NaN values in the financial fields had no related payments.</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">financial_features</span><span class="p">:</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#Quick visual check for outliers</span>
 <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="s1">&#39;bonus&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">iplot</span><span class="p">(</span>
     <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;scatter&#39;</span><span class="p">,</span>
@@ -12632,7 +14170,7 @@ The balanced stock data is now: 0.0, we would expect zero.
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[16]:</div>
+<div class="prompt output_prompt">Out[17]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -12647,7 +14185,7 @@ The balanced stock data is now: 0.0, we would expect zero.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">outlier_salary_bonus</span> <span class="o">=</span> <span class="p">{</span>
@@ -12669,7 +14207,7 @@ The balanced stock data is now: 0.0, we would expect zero.
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[17]:</div>
+<div class="prompt output_prompt">Out[18]:</div>
 
 
 
@@ -12705,7 +14243,7 @@ The balanced stock data is now: 0.0, we would expect zero.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#get the total line out of _everything_.</span>
@@ -12724,7 +14262,202 @@ The balanced stock data is now: 0.0, we would expect zero.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#Now that we&#39;ve seen a &quot;total&quot; record, let&#39;s manually check names to see who else we have present:</span>
+<span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">employees</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">e</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>METTS MARK
+BAXTER JOHN C
+ELLIOTT STEVEN
+CORDES WILLIAM R
+HANNON KEVIN P
+MORDAUNT KRISTINA M
+MEYER ROCKFORD G
+MCMAHON JEFFREY
+HORTON STANLEY C
+PIPER GREGORY F
+HUMPHREY GENE E
+UMANOFF ADAM S
+BLACHMAN JEREMY M
+SUNDE MARTIN
+GIBBS DANA R
+LOWRY CHARLES P
+COLWELL WESLEY
+MULLER MARK S
+JACKSON CHARLENE R
+WESTFAHL RICHARD K
+WALTERS GARETH W
+WALLS JR ROBERT H
+KITCHEN LOUISE
+CHAN RONNIE
+BELFER ROBERT
+SHANKMAN JEFFREY A
+WODRASKA JOHN
+BERGSIEKER RICHARD P
+URQUHART JOHN A
+BIBI PHILIPPE A
+RIEKER PAULA H
+WHALEY DAVID A
+BECK SALLY W
+HAUG DAVID L
+ECHOLS JOHN B
+MENDELSOHN JOHN
+HICKERSON GARY J
+CLINE KENNETH W
+LEWIS RICHARD
+HAYES ROBERT E
+MCCARTY DANNY J
+KOPPER MICHAEL J
+LEFF DANIEL P
+LAVORATO JOHN J
+BERBERIAN DAVID
+DETMERING TIMOTHY J
+WAKEHAM JOHN
+POWERS WILLIAM
+GOLD JOSEPH
+BANNANTINE JAMES M
+DUNCAN JOHN H
+SHAPIRO RICHARD S
+SHERRIFF JOHN R
+SHELBY REX
+LEMAISTRE CHARLES
+DEFFNER JOSEPH M
+KISHKILL JOSEPH G
+WHALLEY LAWRENCE G
+MCCONNELL MICHAEL S
+PIRO JIM
+DELAINEY DAVID W
+SULLIVAN-SHAKLOVITZ COLLEEN
+WROBEL BRUCE
+LINDHOLM TOD A
+MEYER JEROME J
+LAY KENNETH L
+BUTTS ROBERT H
+OLSON CINDY K
+MCDONALD REBECCA
+CUMBERLAND MICHAEL S
+GAHN ROBERT S
+MCCLELLAN GEORGE
+HERMANN ROBERT J
+SCRIMSHAW MATTHEW
+GATHMANN WILLIAM D
+HAEDICKE MARK E
+BOWEN JR RAYMOND M
+GILLIS JOHN
+FITZGERALD JAY L
+MORAN MICHAEL P
+REDMOND BRIAN L
+BAZELIDES PHILIP J
+BELDEN TIMOTHY N
+DURAN WILLIAM D
+THORN TERENCE H
+FASTOW ANDREW S
+FOY JOE
+CALGER CHRISTOPHER F
+RICE KENNETH D
+KAMINSKI WINCENTY J
+LOCKHART EUGENE E
+COX DAVID
+OVERDYKE JR JERE C
+PEREIRA PAULO V. FERRAZ
+STABLER FRANK
+SKILLING JEFFREY K
+BLAKE JR. NORMAN P
+SHERRICK JEFFREY B
+PRENTICE JAMES
+GRAY RODNEY
+PICKERING MARK R
+THE TRAVEL AGENCY IN THE PARK
+NOLES JAMES L
+KEAN STEVEN J
+FOWLER PEGGY
+WASAFF GEORGE
+WHITE JR THOMAS E
+CHRISTODOULOU DIOMEDES
+ALLEN PHILLIP K
+SHARP VICTORIA T
+JAEDICKE ROBERT
+WINOKUR JR. HERBERT S
+BROWN MICHAEL
+BADUM JAMES P
+HUGHES JAMES A
+REYNOLDS LAWRENCE
+DIMICHELE RICHARD G
+BHATNAGAR SANJAY
+CARTER REBECCA C
+BUCHANAN HAROLD G
+YEAP SOON
+MURRAY JULIA H
+GARLAND C KEVIN
+DODSON KEITH
+YEAGER F SCOTT
+HIRKO JOSEPH
+DIETRICH JANET R
+DERRICK JR. JAMES V
+FREVERT MARK A
+PAI LOU L
+BAY FRANKLIN R
+HAYSLETT RODERICK J
+FUGH JOHN L
+FALLON JAMES B
+KOENIG MARK E
+SAVAGE FRANK
+IZZO LAWRENCE L
+TILNEY ELIZABETH A
+MARTIN AMANDA K
+BUY RICHARD B
+GRAMM WENDY L
+CAUSEY RICHARD A
+TAYLOR MITCHELL S
+DONAHUE JR JEFFREY M
+GLISAN JR BEN F
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#&quot;THE TRAVEL AGENCY IN THE PARK&quot; is clearly not a person.  Let&#39;s drop it.</span>
+<span class="n">data_dict</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;THE TRAVEL AGENCY IN THE PARK&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="n">total_idx</span> <span class="o">=</span> <span class="n">employees</span><span class="p">[</span><span class="n">employees</span> <span class="o">==</span> <span class="s1">&#39;THE TRAVEL AGENCY IN THE PARK&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">total_idx</span><span class="p">])</span>
+
+<span class="n">employees</span> <span class="o">=</span> <span class="n">employees</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">employees</span><span class="p">[</span><span class="n">employees</span> <span class="o">==</span>
+                                     <span class="s1">&#39;THE TRAVEL AGENCY IN THE PARK&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#Re-run the visual check for outliers</span>
@@ -12745,7 +14478,7 @@ The balanced stock data is now: 0.0, we would expect zero.
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[19]:</div>
+<div class="prompt output_prompt">Out[22]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -12760,10 +14493,75 @@ The balanced stock data is now: 0.0, we would expect zero.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#possible TO-DO -- imputation -- backfill all financial columns with zeroes when they&#39;re NaN</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#We have a person at 0,0?  </span>
+<span class="n">zero_point</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">k</span><span class="p">:</span> <span class="n">v</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">data_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="s1">&#39;NaN&#39;</span> <span class="ow">or</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">v</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+<span class="p">}</span>
+
+<span class="n">zero_point</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt output_prompt">Out[23]:</div>
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{&#39;LOCKHART EUGENE E&#39;: {&#39;bonus&#39;: &#39;NaN&#39;,
+  &#39;deferral_payments&#39;: &#39;NaN&#39;,
+  &#39;deferred_income&#39;: &#39;NaN&#39;,
+  &#39;director_fees&#39;: &#39;NaN&#39;,
+  &#39;email_address&#39;: &#39;NaN&#39;,
+  &#39;exercised_stock_options&#39;: &#39;NaN&#39;,
+  &#39;expenses&#39;: &#39;NaN&#39;,
+  &#39;from_messages&#39;: &#39;NaN&#39;,
+  &#39;from_poi_to_this_person&#39;: &#39;NaN&#39;,
+  &#39;from_this_person_to_poi&#39;: &#39;NaN&#39;,
+  &#39;loan_advances&#39;: &#39;NaN&#39;,
+  &#39;long_term_incentive&#39;: &#39;NaN&#39;,
+  &#39;other&#39;: &#39;NaN&#39;,
+  &#39;poi&#39;: False,
+  &#39;restricted_stock&#39;: &#39;NaN&#39;,
+  &#39;restricted_stock_deferred&#39;: &#39;NaN&#39;,
+  &#39;salary&#39;: &#39;NaN&#39;,
+  &#39;shared_receipt_with_poi&#39;: &#39;NaN&#39;,
+  &#39;to_messages&#39;: &#39;NaN&#39;,
+  &#39;total_payments&#39;: &#39;NaN&#39;,
+  &#39;total_stock_value&#39;: &#39;NaN&#39;}}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#&quot;Eugene Lockhart&quot; has no values.  Dropping.</span>
+<span class="n">data_dict</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;LOCKHART EUGENE E&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="n">total_idx</span> <span class="o">=</span> <span class="n">employees</span><span class="p">[</span><span class="n">employees</span> <span class="o">==</span> <span class="s1">&#39;LOCKHART EUGENE E&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">total_idx</span><span class="p">])</span>
+
+<span class="n">employees</span> <span class="o">=</span> <span class="n">employees</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">employees</span><span class="p">[</span><span class="n">employees</span> <span class="o">==</span> <span class="s1">&#39;LOCKHART EUGENE E&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">[</span>
+    <span class="mi">0</span><span class="p">])</span>
 </pre></div>
 
 </div>
@@ -12773,28 +14571,13 @@ The balanced stock data is now: 0.0, we would expect zero.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#Add a new column, total_compensation, to summarize the overall compensation someone&#39;s getting from the company.</span>
 <span class="c1">#this is not scaled! Stock is a smaller proportion of compensation and I do not believe it should be weighed as &#39;more&#39; of the package.</span>
 <span class="n">df</span><span class="p">[</span><span class="s1">&#39;total_compensation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;total_payments&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">df</span><span class="p">[</span>
     <span class="s1">&#39;total_stock_value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#Add the employee names into the pandas dataframe</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">employees</span><span class="p">,</span> <span class="n">df</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s2">&quot;employee_name&quot;</span><span class="p">})</span>
 </pre></div>
 
 </div>
@@ -12814,7 +14597,7 @@ The balanced stock data is now: 0.0, we would expect zero.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#Fun with Graphs: total_payments+total_stock_value with Employee Names included</span>
@@ -12846,7 +14629,7 @@ The balanced stock data is now: 0.0, we would expect zero.
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[23]:</div>
+<div class="prompt output_prompt">Out[26]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -12861,7 +14644,7 @@ The balanced stock data is now: 0.0, we would expect zero.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#What if it&#39;s just salary and bonus?</span>
@@ -12888,7 +14671,7 @@ The balanced stock data is now: 0.0, we would expect zero.
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[24]:</div>
+<div class="prompt output_prompt">Out[27]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -12903,7 +14686,7 @@ The balanced stock data is now: 0.0, we would expect zero.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#simple/beautiful outlier detection function from https://github.com/joferkington/oost_paper_code/blob/master/utilities.py</span>
@@ -12949,7 +14732,7 @@ The balanced stock data is now: 0.0, we would expect zero.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#Let&#39;s mark the people who are extremely well paid</span>
@@ -12963,7 +14746,7 @@ The balanced stock data is now: 0.0, we would expect zero.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#visual check of the z-score method</span>
@@ -12989,7 +14772,7 @@ The balanced stock data is now: 0.0, we would expect zero.
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[27]:</div>
+<div class="prompt output_prompt">Out[30]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -13004,7 +14787,7 @@ The balanced stock data is now: 0.0, we would expect zero.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#Quick check of how many persons of interest were and weren&#39;t in our exceptionally well-paid category</span>
@@ -13022,7 +14805,7 @@ The balanced stock data is now: 0.0, we would expect zero.
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[28]:</div>
+<div class="prompt output_prompt">Out[31]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -13049,7 +14832,7 @@ The balanced stock data is now: 0.0, we would expect zero.
     <tr>
       <th rowspan="2" valign="top">False</th>
       <th>False</th>
-      <td>121</td>
+      <td>119</td>
     </tr>
     <tr>
       <th>True</th>
@@ -13077,22 +14860,7 @@ The balanced stock data is now: 0.0, we would expect zero.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[29]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#Because the data was gathered as part of a lawsuit, we can safely assume that any NaN values in the financial fields had no related payments.</span>
-<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">financial_features</span><span class="p">:</span>
-    <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[30]:</div>
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#convert the dataframe back into a dictionary</span>
@@ -13106,7 +14874,7 @@ The balanced stock data is now: 0.0, we would expect zero.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># #First, we&#39;ll do a basic check to see how much overall compensation could predict whether someone&#39;s a poi</span>
@@ -13147,8 +14915,8 @@ The balanced stock data is now: 0.0, we would expect zero.
 
     <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
     <span class="k">print</span> <span class="n">recall_score</span><span class="p">(</span><span class="n">l_test</span><span class="p">,</span> <span class="n">pred</span><span class="p">)</span>
-    <span class="k">print</span> <span class="s2">&quot;recall time:&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="s2">&quot;s&quot;</span>    
-    
+    <span class="k">print</span> <span class="s2">&quot;recall time:&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="s2">&quot;s&quot;</span>
+
     <span class="n">cm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">labels_test</span><span class="p">,</span> <span class="n">pred</span><span class="p">)</span>
     <span class="k">print</span><span class="p">(</span>
         <span class="s1">&#39;There are {0} True Negatives, {1} False Positives, {2} False Negatives, and {3} True Positives&#39;</span>
@@ -13170,15 +14938,15 @@ The balanced stock data is now: 0.0, we would expect zero.
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>training time: 0.002 s
+<pre>training time: 0.001 s
 [ 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.
   0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.]
-prediction time: 0.001 s
-0.916666666667
-accuracy time: 0.001 s
+prediction time: 0.002 s
+0.944444444444
+accuracy time: 0.0 s
 0.0
 recall time: 0.001 s
-There are 33 True Negatives, 0 False Positives, 3 False Negatives, and 0 True Positives
+There are 34 True Negatives, 0 False Positives, 2 False Negatives, and 0 True Positives
 </pre>
 </div>
 </div>
@@ -13189,7 +14957,7 @@ There are 33 True Negatives, 0 False Positives, 3 False Negatives, and 0 True Po
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[32]:</div>
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># #TODO: Consider making graph of actual y/n poi on left, predicted y/n poi on right</span>
@@ -13212,75 +14980,13 @@ There are 33 True Negatives, 0 False Positives, 3 False Negatives, and 0 True Po
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#How often were persons of interest emailing each other?</span>
 <span class="n">trace</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
     <span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">from_poi_to_this_person</span><span class="p">,</span>
     <span class="n">y</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">from_this_person_to_poi</span><span class="p">,</span>
-    <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;markers&#39;</span><span class="p">,</span>
-    <span class="n">marker</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
-        <span class="n">size</span><span class="o">=</span><span class="s1">&#39;12&#39;</span><span class="p">,</span>
-        <span class="n">color</span><span class="o">=</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">x</span> <span class="k">else</span> <span class="mi">0</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">poi</span><span class="p">),</span>
-        <span class="n">colorscale</span><span class="o">=</span><span class="s1">&#39;Viridis&#39;</span><span class="p">,</span>
-        <span class="n">showscale</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span>
-    <span class="n">text</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">employee_name</span><span class="p">,</span> <span class="p">)</span>
-<span class="n">py</span><span class="o">.</span><span class="n">iplot</span><span class="p">([</span><span class="n">trace</span><span class="p">],</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;scatter-plot-with-colorscale&#39;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-<div class="prompt output_prompt">Out[33]:</div>
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="https://plot.ly/~jennis/165.embed" height="525px" width="100%"></iframe>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[34]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">scaler</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
-<span class="c1">#Assuming if we have no emails to a person in the records, there are none, as this data was obtained through legal discovery.</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;from_poi_to_this_person&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;from_poi_to_this_person&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;from_this_person_to_poi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;from_this_person_to_poi&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;from_poi_scaled&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;from_poi_to_this_person&#39;</span><span class="p">]</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;to_poi_scaled&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;from_this_person_to_poi&#39;</span><span class="p">]</span>
-
-<span class="n">df</span><span class="p">[[</span><span class="s1">&#39;from_poi_scaled&#39;</span><span class="p">,</span> <span class="s1">&#39;to_poi_scaled&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span>
-    <span class="p">[</span><span class="s1">&#39;from_poi_to_this_person&#39;</span><span class="p">,</span> <span class="s1">&#39;from_this_person_to_poi&#39;</span><span class="p">]])</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[35]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#How often were persons of interest emailing each other?</span>
-<span class="n">trace</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
-    <span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">from_poi_scaled</span><span class="p">,</span>
-    <span class="n">y</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">to_poi_scaled</span><span class="p">,</span>
     <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;markers&#39;</span><span class="p">,</span>
     <span class="n">marker</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
         <span class="n">size</span><span class="o">=</span><span class="s1">&#39;12&#39;</span><span class="p">,</span>
@@ -13318,6 +15024,68 @@ There are 33 True Negatives, 0 False Positives, 3 False Negatives, and 0 True Po
 <div class="prompt input_prompt">In&nbsp;[36]:</div>
 <div class="inner_cell">
     <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">scaler</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+<span class="c1">#Assuming if we have no emails to a person in the records, there are none, as this data was obtained through legal discovery.</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;from_poi_to_this_person&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;from_poi_to_this_person&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;from_this_person_to_poi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;from_this_person_to_poi&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;from_poi_scaled&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;from_poi_to_this_person&#39;</span><span class="p">]</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;to_poi_scaled&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;from_this_person_to_poi&#39;</span><span class="p">]</span>
+
+<span class="n">df</span><span class="p">[[</span><span class="s1">&#39;from_poi_scaled&#39;</span><span class="p">,</span> <span class="s1">&#39;to_poi_scaled&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span>
+    <span class="p">[</span><span class="s1">&#39;from_poi_to_this_person&#39;</span><span class="p">,</span> <span class="s1">&#39;from_this_person_to_poi&#39;</span><span class="p">]])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#How often were persons of interest emailing each other?</span>
+<span class="n">trace</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">from_poi_scaled</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">to_poi_scaled</span><span class="p">,</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;markers&#39;</span><span class="p">,</span>
+    <span class="n">marker</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+        <span class="n">size</span><span class="o">=</span><span class="s1">&#39;12&#39;</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">x</span> <span class="k">else</span> <span class="mi">0</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">poi</span><span class="p">),</span>
+        <span class="n">colorscale</span><span class="o">=</span><span class="s1">&#39;Viridis&#39;</span><span class="p">,</span>
+        <span class="n">showscale</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span>
+    <span class="n">text</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">employee_name</span><span class="p">,</span> <span class="p">)</span>
+<span class="n">py</span><span class="o">.</span><span class="n">iplot</span><span class="p">([</span><span class="n">trace</span><span class="p">],</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;scatter-plot-with-colorscale&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt output_prompt">Out[37]:</div>
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="https://plot.ly/~jennis/165.embed" height="525px" width="100%"></iframe>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
+<div class="inner_cell">
+    <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#That was interesting to see, but shouldn&#39;t be used for testing -- we don&#39;t want to scale based on all data points</span>
 <span class="c1">#then train PCA on some data points.</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;from_poi_scaled&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -13331,7 +15099,7 @@ There are 33 True Negatives, 0 False Positives, 3 False Negatives, and 0 True Po
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="prompt input_prompt">In&nbsp;[39]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#convert the dataframe back into a dictionary</span>
@@ -13345,7 +15113,7 @@ There are 33 True Negatives, 0 False Positives, 3 False Negatives, and 0 True Po
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[38]:</div>
+<div class="prompt input_prompt">In&nbsp;[40]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">features_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;poi&#39;</span><span class="p">,</span> <span class="s1">&#39;from_poi_to_this_person&#39;</span><span class="p">,</span> <span class="s1">&#39;from_this_person_to_poi&#39;</span><span class="p">]</span>
@@ -13359,7 +15127,7 @@ There are 33 True Negatives, 0 False Positives, 3 False Negatives, and 0 True Po
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[39]:</div>
+<div class="prompt input_prompt">In&nbsp;[41]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">features_train_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">features_train</span><span class="p">)</span>
@@ -13373,7 +15141,7 @@ There are 33 True Negatives, 0 False Positives, 3 False Negatives, and 0 True Po
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[40]:</div>
+<div class="prompt input_prompt">In&nbsp;[42]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#create &amp; fit PCA</span>
@@ -13395,7 +15163,7 @@ There are 33 True Negatives, 0 False Positives, 3 False Negatives, and 0 True Po
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>done in 0.004s
+<pre>done in 0.002s
 </pre>
 </div>
 </div>
@@ -13406,7 +15174,7 @@ There are 33 True Negatives, 0 False Positives, 3 False Negatives, and 0 True Po
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[41]:</div>
+<div class="prompt input_prompt">In&nbsp;[43]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">features_train_transformed</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">features_train_scaled</span><span class="p">)</span>
@@ -13420,7 +15188,7 @@ There are 33 True Negatives, 0 False Positives, 3 False Negatives, and 0 True Po
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[42]:</div>
+<div class="prompt input_prompt">In&nbsp;[44]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Predict without scaling or PCA&#39;</span><span class="p">)</span>
@@ -13445,7 +15213,7 @@ training time: 0.001 s
   0.  0.]
 prediction time: 0.001 s
 0.85
-accuracy time: 0.001 s
+accuracy time: 0.0 s
 0.0
 recall time: 0.001 s
 There are 17 True Negatives, 0 False Positives, 3 False Negatives, and 0 True Positives
@@ -13459,7 +15227,7 @@ There are 17 True Negatives, 0 False Positives, 3 False Negatives, and 0 True Po
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[43]:</div>
+<div class="prompt input_prompt">In&nbsp;[45]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Predict with scaling only&#39;</span><span class="p">)</span>
@@ -13480,12 +15248,12 @@ There are 17 True Negatives, 0 False Positives, 3 False Negatives, and 0 True Po
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Predict with scaling only
-training time: 0.003 s
+training time: 0.002 s
 [ 0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.
   0.  0.]
 prediction time: 0.001 s
 0.8
-accuracy time: 0.001 s
+accuracy time: 0.0 s
 0.0
 recall time: 0.002 s
 There are 16 True Negatives, 1 False Positives, 3 False Negatives, and 0 True Positives
@@ -13499,7 +15267,7 @@ There are 16 True Negatives, 1 False Positives, 3 False Negatives, and 0 True Po
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[44]:</div>
+<div class="prompt input_prompt">In&nbsp;[46]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Predict with scaling and PCA&#39;</span><span class="p">)</span>
@@ -13520,12 +15288,12 @@ There are 16 True Negatives, 1 False Positives, 3 False Negatives, and 0 True Po
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Predict with scaling and PCA
-training time: 0.002 s
+training time: 0.003 s
 [ 0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.
   0.  0.]
 prediction time: 0.001 s
 0.8
-accuracy time: 0.001 s
+accuracy time: 0.0 s
 0.0
 recall time: 0.001 s
 There are 16 True Negatives, 1 False Positives, 3 False Negatives, and 0 True Positives
@@ -13560,7 +15328,7 @@ I'm specifically interested in how often persons of interest emailed the higher-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[45]:</div>
+<div class="prompt input_prompt">In&nbsp;[47]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">features_list</span> <span class="o">=</span> <span class="p">[</span>
@@ -13577,7 +15345,7 @@ I'm specifically interested in how often persons of interest emailed the higher-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[46]:</div>
+<div class="prompt input_prompt">In&nbsp;[48]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Predict using total payments, total stock, from poi, to poi&#39;</span><span class="p">)</span>
@@ -13601,11 +15369,11 @@ training time: 0.001 s
 [ 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.
   0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.]
 prediction time: 0.001 s
-0.916666666667
-accuracy time: 0.001 s
+0.944444444444
+accuracy time: 0.0 s
 0.0
 recall time: 0.001 s
-There are 33 True Negatives, 0 False Positives, 3 False Negatives, and 0 True Positives
+There are 34 True Negatives, 0 False Positives, 2 False Negatives, and 0 True Positives
 </pre>
 </div>
 </div>
@@ -13626,7 +15394,7 @@ There are 33 True Negatives, 0 False Positives, 3 False Negatives, and 0 True Po
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[47]:</div>
+<div class="prompt input_prompt">In&nbsp;[49]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#Let&#39;s try selecting features based on the financial features and connectivity / how often the person sent poi emails</span>
@@ -13646,7 +15414,7 @@ There are 33 True Negatives, 0 False Positives, 3 False Negatives, and 0 True Po
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="prompt input_prompt">In&nbsp;[50]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">features_selected</span> <span class="o">=</span> <span class="p">[</span>
@@ -13670,7 +15438,7 @@ There are 33 True Negatives, 0 False Positives, 3 False Negatives, and 0 True Po
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Features selected by SelectKBest:
-[&#39;salary&#39;, &#39;bonus&#39;, &#39;long_term_incentive&#39;, &#39;deferred_income&#39;, &#39;loan_advances&#39;, &#39;total_payments&#39;, &#39;exercised_stock_options&#39;, &#39;restricted_stock&#39;, &#39;total_stock_value&#39;, &#39;from_poi_to_this_person&#39;]
+[&#39;salary&#39;, &#39;bonus&#39;, &#39;deferred_income&#39;, &#39;loan_advances&#39;, &#39;expenses&#39;, &#39;total_payments&#39;, &#39;exercised_stock_options&#39;, &#39;restricted_stock&#39;, &#39;total_stock_value&#39;, &#39;from_poi_to_this_person&#39;]
 </pre>
 </div>
 </div>
@@ -13691,7 +15459,7 @@ There are 33 True Negatives, 0 False Positives, 3 False Negatives, and 0 True Po
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[49]:</div>
+<div class="prompt input_prompt">In&nbsp;[51]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span> <span class="s1">&#39;Looking at the f score for each to validate that our selected scores had significantly higher scores than non-selected&#39;</span>
@@ -13712,21 +15480,21 @@ There are 33 True Negatives, 0 False Positives, 3 False Negatives, and 0 True Po
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Looking at the f score for each to validate that our selected scores had significantly higher scores than non-selected
-[0, 1, 2, 3, 5, 9, 10, 11, 13, 14]
+[0, 1, 3, 5, 7, 9, 10, 11, 13, 14]
 </pre>
 </div>
 </div>
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[49]:</div>
+<div class="prompt output_prompt">Out[51]:</div>
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([ 13.94966341,  16.76123647,   7.15671684,  15.74287286,
-         0.046985  ,   6.45380968,   3.6482477 ,   3.76265755,
-         1.54783121,   7.6658715 ,  23.26379643,   8.04137491,
-         0.71774165,  22.76795411,   4.45372207,   0.09446109])</pre>
+<pre>array([  9.05321627,  13.31909446,   5.22333556,  13.0323781 ,
+         0.1554117 ,   5.45507033,   3.53703896,   6.00885032,
+         2.21307488,   6.16144495,  12.40878064,   8.97050543,
+         0.83774729,  13.66940293,   5.56606039,   3.00002746])</pre>
 </div>
 
 </div>
@@ -13737,7 +15505,7 @@ There are 33 True Negatives, 0 False Positives, 3 False Negatives, and 0 True Po
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[64]:</div>
+<div class="prompt input_prompt">In&nbsp;[52]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">create_test_split</span><span class="p">(</span><span class="n">features_list</span><span class="p">)</span>
@@ -13772,7 +15540,7 @@ There are 33 True Negatives, 0 False Positives, 3 False Negatives, and 0 True Po
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>The best parameters are: {&#39;linearsvc__C&#39;: 4, &#39;pca__n_components&#39;: 3, &#39;pca__svd_solver&#39;: &#39;full&#39;}
+<pre>The best parameters are: {&#39;linearsvc__C&#39;: 37, &#39;pca__n_components&#39;: 13, &#39;pca__svd_solver&#39;: &#39;arpack&#39;}
 </pre>
 </div>
 </div>
@@ -13783,7 +15551,7 @@ There are 33 True Negatives, 0 False Positives, 3 False Negatives, and 0 True Po
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[70]:</div>
+<div class="prompt input_prompt">In&nbsp;[53]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span> <span class="n">test_classifier</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">my_dataset</span><span class="p">,</span> <span class="n">features_list</span><span class="p">)</span>
@@ -13801,13 +15569,12 @@ There are 33 True Negatives, 0 False Positives, 3 False Negatives, and 0 True Po
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Tester Classification report
-Pipeline(steps=[(&#39;minmaxscaler&#39;, MinMaxScaler(copy=True, feature_range=(0, 1))), (&#39;pca&#39;, PCA(copy=True, iterated_power=&#39;auto&#39;, n_components=3, random_state=None,
-  svd_solver=&#39;full&#39;, tol=0.0, whiten=False)), (&#39;linearsvc&#39;, LinearSVC(C=4, class_weight=None, dual=True, fit_intercept=True,
-     intercept_scaling...=100, presort=&#39;auto&#39;, random_state=None,
+<pre>Pipeline(steps=[(&#39;minmaxscaler&#39;, MinMaxScaler(copy=True, feature_range=(0, 1))), (&#39;pca&#39;, PCA(copy=True, iterated_power=&#39;auto&#39;, n_components=13, random_state=None,
+  svd_solver=&#39;arpack&#39;, tol=0.0, whiten=False)), (&#39;linearsvc&#39;, LinearSVC(C=37, class_weight=None, dual=True, fit_intercept=True,
+     intercept_sca...=100, presort=&#39;auto&#39;, random_state=None,
               subsample=1.0, verbose=0, warm_start=False))])
-	Accuracy: 0.80447	Precision: 0.24354	Recall: 0.22150	F1: 0.23200	F2: 0.22558
-	Total predictions: 15000	True positives:  443	False positives: 1376	False negatives: 1557	True negatives: 11624
+	Accuracy: 0.83193	Precision: 0.30888	Recall: 0.21050	F1: 0.25037	F2: 0.22482
+	Total predictions: 15000	True positives:  421	False positives:  942	False negatives: 1579	True negatives: 12058
 
 None
 </pre>
@@ -13820,7 +15587,7 @@ None
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[78]:</div>
+<div class="prompt input_prompt">In&nbsp;[54]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">create_test_split</span><span class="p">(</span><span class="n">features_list</span><span class="p">)</span>
@@ -13855,7 +15622,7 @@ None
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>The best parameters are: {&#39;linearsvc__C&#39;: 1, &#39;pca__n_components&#39;: 1, &#39;pca__svd_solver&#39;: &#39;auto&#39;}
+<pre>The best parameters are: {&#39;linearsvc__C&#39;: 5, &#39;pca__n_components&#39;: 13, &#39;pca__svd_solver&#39;: &#39;full&#39;}
 </pre>
 </div>
 </div>
@@ -13866,7 +15633,7 @@ None
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[79]:</div>
+<div class="prompt input_prompt">In&nbsp;[55]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span> <span class="n">test_classifier</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">my_dataset</span><span class="p">,</span> <span class="n">features_list</span><span class="p">)</span>
@@ -13884,12 +15651,12 @@ None
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Pipeline(steps=[(&#39;minmaxscaler&#39;, MinMaxScaler(copy=True, feature_range=(0, 1))), (&#39;pca&#39;, PCA(copy=True, iterated_power=&#39;auto&#39;, n_components=1, random_state=None,
-  svd_solver=&#39;auto&#39;, tol=0.0, whiten=False)), (&#39;linearsvc&#39;, LinearSVC(C=1, class_weight=None, dual=True, fit_intercept=True,
-     intercept_scaling...=100, presort=&#39;auto&#39;, random_state=None,
+<pre>Pipeline(steps=[(&#39;minmaxscaler&#39;, MinMaxScaler(copy=True, feature_range=(0, 1))), (&#39;pca&#39;, PCA(copy=True, iterated_power=&#39;auto&#39;, n_components=13, random_state=None,
+  svd_solver=&#39;full&#39;, tol=0.0, whiten=False)), (&#39;linearsvc&#39;, LinearSVC(C=5, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scalin...=100, presort=&#39;auto&#39;, random_state=None,
               subsample=1.0, verbose=0, warm_start=False))])
-	Accuracy: 0.80400	Precision: 0.24401	Recall: 0.22400	F1: 0.23358	F2: 0.22773
-	Total predictions: 15000	True positives:  448	False positives: 1388	False negatives: 1552	True negatives: 11612
+	Accuracy: 0.83233	Precision: 0.31327	Recall: 0.21600	F1: 0.25570	F2: 0.23030
+	Total predictions: 15000	True positives:  432	False positives:  947	False negatives: 1568	True negatives: 12053
 
 None
 </pre>
@@ -13902,20 +15669,19 @@ None
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[80]:</div>
+<div class="prompt input_prompt">In&nbsp;[56]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">AdaBoostClassifier</span>
-
-<span class="n">create_test_split</span><span class="p">(</span><span class="n">features_list</span><span class="p">)</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">create_test_split</span><span class="p">(</span><span class="n">features_list</span><span class="p">)</span>
 <span class="n">cv</span> <span class="o">=</span> <span class="n">StratifiedShuffleSplit</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="n">pipe</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">SelectKBest</span><span class="p">(),</span> <span class="n">AdaBoostClassifier</span><span class="p">())</span>
 
 <span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;selectkbest__k&#39;</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">15</span><span class="p">),</span>
-    <span class="s1">&#39;adaboostclassifier__n_estimators&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">70</span><span class="p">],</span>
-    <span class="s1">&#39;adaboostclassifier__learning_rate&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.1</span><span class="p">)</span>
+    <span class="s1">&#39;selectkbest__k&#39;</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span>
+    <span class="s1">&#39;adaboostclassifier__n_estimators&#39;</span><span class="p">:</span>
+    <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">70</span><span class="p">],</span>
+    <span class="s1">&#39;adaboostclassifier__learning_rate&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
 <span class="p">}</span>
 
 <span class="n">gs</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">pipe</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">cv</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;recall&#39;</span><span class="p">)</span>
@@ -13938,7 +15704,7 @@ None
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>The best parameters are: {&#39;selectkbest__k&#39;: 13, &#39;adaboostclassifier__n_estimators&#39;: 50, &#39;adaboostclassifier__learning_rate&#39;: 0.90000000000000002}
+<pre>The best parameters are: {&#39;selectkbest__k&#39;: 12, &#39;adaboostclassifier__n_estimators&#39;: 30, &#39;adaboostclassifier__learning_rate&#39;: 0.70000000000000007}
 </pre>
 </div>
 </div>
@@ -13949,7 +15715,7 @@ None
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[81]:</div>
+<div class="prompt input_prompt">In&nbsp;[57]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span> <span class="n">test_classifier</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">my_dataset</span><span class="p">,</span> <span class="n">features_list</span><span class="p">)</span>
@@ -13967,11 +15733,11 @@ None
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Pipeline(steps=[(&#39;selectkbest&#39;, SelectKBest(k=13, score_func=&lt;function f_classif at 0x000000000CF9CE48&gt;)), (&#39;adaboostclassifier&#39;, AdaBoostClassifier(algorithm=&#39;SAMME.R&#39;, base_estimator=None,
-          learning_rate=0.90000000000000002, n_estimators=50,
+<pre>Pipeline(steps=[(&#39;selectkbest&#39;, SelectKBest(k=12, score_func=&lt;function f_classif at 0x000000000DBABE48&gt;)), (&#39;adaboostclassifier&#39;, AdaBoostClassifier(algorithm=&#39;SAMME.R&#39;, base_estimator=None,
+          learning_rate=0.70000000000000007, n_estimators=30,
           random_state=None))])
-	Accuracy: 0.85967	Precision: 0.46377	Recall: 0.33600	F1: 0.38968	F2: 0.35559
-	Total predictions: 15000	True positives:  672	False positives:  777	False negatives: 1328	True negatives: 12223
+	Accuracy: 0.85080	Precision: 0.42077	Recall: 0.31600	F1: 0.36094	F2: 0.33256
+	Total predictions: 15000	True positives:  632	False positives:  870	False negatives: 1368	True negatives: 12130
 
 None
 </pre>
@@ -13984,7 +15750,7 @@ None
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[83]:</div>
+<div class="prompt input_prompt">In&nbsp;[58]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#Add scaling</span>
@@ -14019,7 +15785,7 @@ None
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>The best parameters are: {&#39;selectkbest__k&#39;: 13, &#39;adaboostclassifier__n_estimators&#39;: 50, &#39;adaboostclassifier__learning_rate&#39;: 0.90000000000000002}
+<pre>The best parameters are: {&#39;selectkbest__k&#39;: 12, &#39;adaboostclassifier__n_estimators&#39;: 30, &#39;adaboostclassifier__learning_rate&#39;: 0.70000000000000007}
 </pre>
 </div>
 </div>
@@ -14030,7 +15796,122 @@ None
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[84]:</div>
+<div class="prompt input_prompt">In&nbsp;[59]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">clf</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt output_prompt">Out[59]:</div>
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Pipeline(steps=[(&#39;minmaxscaler&#39;, MinMaxScaler(copy=True, feature_range=(0, 1))), (&#39;selectkbest&#39;, SelectKBest(k=12, score_func=&lt;function f_classif at 0x000000000DBABE48&gt;)), (&#39;adaboostclassifier&#39;, AdaBoostClassifier(algorithm=&#39;SAMME.R&#39;, base_estimator=None,
+          learning_rate=0.70000000000000007, n_estimators=30,
+          random_state=None))])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[60]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">features_selected</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">features_list</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">clf</span><span class="o">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s1">&#39;selectkbest&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_support</span><span class="p">(</span><span class="n">indices</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="k">print</span> <span class="s1">&#39;Features selected by SelectKBest:&#39;</span>
+<span class="k">print</span> <span class="n">features_selected</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Features selected by SelectKBest:
+[&#39;salary&#39;, &#39;bonus&#39;, &#39;long_term_incentive&#39;, &#39;deferred_income&#39;, &#39;loan_advances&#39;, &#39;other&#39;, &#39;expenses&#39;, &#39;total_payments&#39;, &#39;exercised_stock_options&#39;, &#39;restricted_stock&#39;, &#39;total_stock_value&#39;, &#39;from_poi_to_this_person&#39;]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[61]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span> <span class="s1">&#39;Looking at the f score for each to validate that our selected scores had significantly higher scores than non-selected&#39;</span>
+<span class="k">print</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">clf</span><span class="o">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s1">&#39;selectkbest&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_support</span><span class="p">(</span><span class="n">indices</span><span class="o">=</span><span class="bp">True</span><span class="p">)]</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s1">&#39;selectkbest&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">scores_</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Looking at the f score for each to validate that our selected scores had significantly higher scores than non-selected
+[0, 1, 2, 3, 5, 6, 7, 9, 10, 11, 13, 14]
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+<div class="prompt output_prompt">Out[61]:</div>
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([ 18.28968404,  20.79225205,   9.92218601,  11.42489149,
+         0.22885962,   7.18405566,   4.2024363 ,   5.41890019,
+         2.13148399,   9.28387362,  22.34897541,   8.82544222,
+         0.76814634,  22.51054909,   5.24344971,   2.38261211])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[62]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span> <span class="n">test_classifier</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">my_dataset</span><span class="p">,</span> <span class="n">features_list</span><span class="p">)</span>
@@ -14048,11 +15929,11 @@ None
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Pipeline(steps=[(&#39;minmaxscaler&#39;, MinMaxScaler(copy=True, feature_range=(0, 1))), (&#39;selectkbest&#39;, SelectKBest(k=13, score_func=&lt;function f_classif at 0x000000000CF9CE48&gt;)), (&#39;adaboostclassifier&#39;, AdaBoostClassifier(algorithm=&#39;SAMME.R&#39;, base_estimator=None,
-          learning_rate=0.90000000000000002, n_estimators=50,
+<pre>Pipeline(steps=[(&#39;minmaxscaler&#39;, MinMaxScaler(copy=True, feature_range=(0, 1))), (&#39;selectkbest&#39;, SelectKBest(k=12, score_func=&lt;function f_classif at 0x000000000DBABE48&gt;)), (&#39;adaboostclassifier&#39;, AdaBoostClassifier(algorithm=&#39;SAMME.R&#39;, base_estimator=None,
+          learning_rate=0.70000000000000007, n_estimators=30,
           random_state=None))])
-	Accuracy: 0.85927	Precision: 0.46201	Recall: 0.33750	F1: 0.39006	F2: 0.35673
-	Total predictions: 15000	True positives:  675	False positives:  786	False negatives: 1325	True negatives: 12214
+	Accuracy: 0.85147	Precision: 0.42369	Recall: 0.31650	F1: 0.36234	F2: 0.33337
+	Total predictions: 15000	True positives:  633	False positives:  861	False negatives: 1367	True negatives: 12139
 
 None
 </pre>
@@ -14065,7 +15946,20 @@ None
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[63]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">dump_classifier_and_data</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">my_dataset</span><span class="p">,</span> <span class="n">features_list</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[64]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#Future possibility, elephant is too large for scope right now: Consider checking for -- is there a group of words where the poi to poi emails [no non-pois in email?] had a higher usage</span>

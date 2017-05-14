@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>References</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>project_overview</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 <style type="text/css">
@@ -11789,7 +11789,8 @@ div#notebook {
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Project-Goal">Project Goal<a class="anchor-link" href="#Project-Goal">&#182;</a></h4><p>The goal of this project is to programatically determine correlations between the data obtained in the Enron case and whether a person was a 'person of interest' in the case.</p>
 <p>If we could find a clear and consise way to determine whether someone is breaking the law in banking, we could use that methodology to automatically flag when a person should be investigated for possible active crimes.  Having personally worked in the financial industry, I know that there is a constant drive to catch a person who is violating rules or law, and to prevent the bank from losing money due to an employee's misconduct or malfeasance.</p>
-<p>This specific data set is the result of discovery in an extensive legal case, so we can safely assume that any financial values not reported are zero and that all data that could be reported was reported.  While validating that the financials balanced vertically, I found two instances where the pdf with financial values was missing a dash for a zero value, which created the import process to set everything off a bit.  I created code to adjust those two records to properly reflect what's visually shown in the pdf.  I also noticed that the 'total' line imported, so I removed that from the data set as well.</p>
+<p>This is data from the Enron case.  In it, we have information regarding how much each person was compensated, we calculate how often they emailed other persons in the data, and we know whether they were considered a person of interest in the case.  Out of the 35 persons of interest in the case, the data set contains data on 18 of them.  There are 143 persons in this data, 35 or 12.59% of which are persons of interest.  In other words, out of the 143 persons total, 35 are persons of interest and 125 are not persons of interest.</p>
+<p>This specific data set is the result of discovery in an extensive legal case, so we can safely assume that any financial values not reported are zero and that all data that could be reported was reported.  While validating that the financials balanced vertically, I found two instances where the pdf with financial values was missing a dash for a zero value, which created the import process to set everything off a bit.  I created code to adjust those two records to properly reflect what's visually shown in the pdf.  I also noticed that the 'total' line imported, so I removed that from the data set as well.  While digging into other outliers in the data, I noticed both the name of a travel agency and an individual with only NaN or False data points.  I've also removed these in the interest of data quality.</p>
 
 </div>
 </div>
@@ -11799,8 +11800,10 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Feature-Selection">Feature Selection<a class="anchor-link" href="#Feature-Selection">&#182;</a></h4><p>In my initial testing, I created a feature to contain the sum of all compensation the individual received, as well as a feature to determine whether their total compensation was an outlier when compared to the other individuals in the data set.  These were interesting to graph, but did not show any visual promise of correlation between the feature and whether the person was a POI.</p>
+<h4 id="Feature-Selection">Feature Selection<a class="anchor-link" href="#Feature-Selection">&#182;</a></h4><p>When choosing features, there's a tradeoff between bias and variance, or simplicity of fit versus goodness of fit.  Too few features chosen will create an oversimplified model, while too many features chosen will create an overfitted model.  The oversimplified model will pay too little attention to the training data, and the otherfitted model pays too much attention to the training data.  They both will not perform well on testing data, or data that is 'new' to the model.  The goal of feature selection is to find a balance between both, where the features that are used are those with the most impact on the data, and the model will have a low error rate on both data used in training and data used in testing.</p>
+<p>In my initial testing, I created a feature to contain the sum of all compensation the individual received, as well as a feature to determine whether their total compensation was an outlier when compared to the other individuals in the data set.  These were interesting to graph, but did not show any visual promise of correlation between the feature and whether the person was a POI.</p>
 <p>I eventually automatically selected my final features using MinMaxScaler and SelectKBest in a pipeline.  I tried various combinations of manually selecting features and using different appropriate feature selection methods, and this was the most effective of my trial selections. Because most of the features I was testing with SelectKBest were financial features, I tried both scaled and non-scaled testing.  Scaled testing performed slightly better overall, with slightly worse precision and slightly better recall.  Because I was trying to minimize the false negatives, I chose the scaled version as my final identifier.  I also used recall for the scoring method, as I wanted to associate a higher cost to false negatives than false positives.  If given the choice, I'd rather investigate someone who's innocent of fraud than miss someone who's guilty.</p>
+<p>The final features selected were salary, bonus, long_term_incentive, deferred_income, loan_advances, other, expenses, total_payments, exercised_stock_options, restricted_stock, total_stock_value, and from_poi_to_this_person. The lowest feature importance score in the set was 0.69 for exercised stock options, and the highest score in the set was 22.86 for salary.  All other features in the data set were dropped due to low feature importance scores.</p>
 
 </div>
 </div>
@@ -11820,13 +11823,15 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Algorithm-Tuning">Algorithm Tuning<a class="anchor-link" href="#Algorithm-Tuning">&#182;</a></h4><p>Tuning the parameters of the algorithm is similar to changing the settings the formula will use to determine what type of correlation the algorithm is looking for, and how it will look for that correlation.  Rather than run a large number of combinations of parameters through trial and error, I used Grid Search CV to find the best estimator for each of the pipelines I created in my testing.  In order, using Grid Search CV for all, the worst to best performing pipelines were:</p>
+<h4 id="Algorithm-Tuning">Algorithm Tuning<a class="anchor-link" href="#Algorithm-Tuning">&#182;</a></h4><p>Tuning the parameters of the algorithm is a term to describe adjusting the model to achieve the best possible balance between performing well on the training data and performing well on testing data.  Again, this is where the bias-variance tradeoff comes into play.  The goal is to select the algorithm's parameters in such a way that we will have a model that, to paraphrase Albert Einstein, is as simple as possible, but no simpler.  An overfitted model will both have poor outcomes with a much higher error on the testing set than on the training set, as well as poor performance as each new feature added increases the computational cost of the model.</p>
+<p>Rather than run a large number of combinations of parameters through trial and error, I used Grid Search CV to find the best estimator for each of the pipelines I created in my testing.  In order, using Grid Search CV for all, the worst to best performing pipelines were:</p>
 <ul>
 <li>Min Max Scaler, PCA, Linear SVC, and Gradient Boosting Classifier using f1 scoring</li>
 <li>Min Max Scaler, PCA, Linear SVC, and Gradient Boosting Classifier using recall scoring</li>
 <li>Select K Best and Ada Boost using recall scoring</li>
 <li>Min Max Scaler, Select K Best, and Ada Boost using recall scoring</li>
 </ul>
+<p>For the final grid search, I gave select k best a k range of 1 through 15, as I knew I wanted to remove a mininum of one feature and would allow the classifier to determine the best number of features to keep depending on each feature's importance score. For the ada boost classifier, I provided the grid search with potential estimator counts of 15 through 70 with a 5 point difference between each.  The ada boost classifier also was provided learning rate options of a range from 0.1 to 1 with a .1 difference between each.</p>
 
 </div>
 </div>
@@ -11861,11 +11866,14 @@ div#notebook {
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Reference-List">Reference List<a class="anchor-link" href="#Reference-List">&#182;</a></h4><p>For transparency I'm including everything I referenced, or read, while working on this project; regardless of whether it directly affected code in the project.</p>
 <p>"1.11. Ensemble Methods — Scikit-Learn 0.18.1 Documentation". Scikit-learn.org. N.p., 2017. Web. 9 May 2017.</p>
+<p>"4.1. Pipeline And Featureunion: Combining Estimators — Scikit-Learn 0.18.1 Documentation". Scikit-learn.org. N.p., 2017. Web. 13 May 2017.</p>
 <p>"Adaboostclassifier With Different Base Learners". Stackoverflow.com. N.p., 2017. Web. 9 May 2017.</p>
 <p>"Automatically Play Sound In Ipython Notebook". Stackoverflow.com. N.p., 2017. Web. 9 May 2017.</p>
+<p>Grus, Joel. Data Science From Scratch. Sebastopol, Calif.: O'Reilly, 2015. Print.</p>
+<p>"How To Check If All Values Of A Dictionary Are 0, In Python?". Stackoverflow.com. N.p., 2017. Web. 13 May 2017.</p>
+<p>"How To Ignore Deprecation Warnings In Python". Stackoverflow.com. N.p., 2017. Web. 9 May 2017.</p>
 <p>"How To Use A Decimal Range() Step Value?". Stackoverflow.com. N.p., 2017. Web. 9 May 2017.</p>
 <p>P, Adam. "Markdown Cheatsheet". GitHub. N.p., 2017. Web. 9 May 2017.</p>
-<p>Python, How. "How To Ignore Deprecation Warnings In Python". Stackoverflow.com. N.p., 2017. Web. 9 May 2017.</p>
 <p>Scikit-Learn Algorithm Cheat-Sheet. 2017. Web. 9 May 2017.</p>
 <p>"Sklearn.Ensemble.Adaboostclassifier — Scikit-Learn 0.18.1 Documentation". Scikit-learn.org. N.p., 2017. Web. 9 May 2017.</p>
 <p>"Sklearn.Model_Selection.Gridsearchcv — Scikit-Learn 0.18.1 Documentation". Scikit-learn.org. N.p., 2017. Web. 9 May 2017.</p>
