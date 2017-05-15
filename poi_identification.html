@@ -12184,6 +12184,37 @@ This module was deprecated in version 0.18 in favor of the model_selection modul
 <div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#df.count returns the number of non-NaN data points for each axis.</span>
+<span class="c1">#I&#39;m summing these to get the </span>
+<span class="k">print</span> <span class="p">(</span><span class="s1">&#39;There are {0} total data points in this data, excluding NaN values.&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">count</span><span class="p">()))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>There are 1708 total data points in this data, excluding NaN values.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">persons_of_interest</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">data_dict</span> <span class="k">if</span> <span class="n">data_dict</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="s1">&#39;poi&#39;</span><span class="p">]]</span>
 
 <span class="c1">#known issue in this data -- email list is restricted to persons of interest who worked for Enron</span>
@@ -12223,7 +12254,7 @@ In other words, there are 146 persons total, 18 persons of interest, and 128 who
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span> <span class="s1">&#39;Where is data missing?  What values have NaN, and what percentage of those is missing data?&#39;</span>
@@ -12277,7 +12308,7 @@ total_stock_value NaN values: 20 people = 13.70%
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#Add the employee names into the pandas dataframe</span>
@@ -12296,7 +12327,7 @@ total_stock_value NaN values: 20 people = 13.70%
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[9]:</div>
+<div class="prompt output_prompt">Out[10]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -13807,7 +13838,7 @@ total_stock_value NaN values: 20 people = 13.70%
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#Let&#39;s see how compensation &#39;balances&#39; horizontally, so we know which stock options have the richest information.</span>
@@ -13852,7 +13883,7 @@ The balanced stock data is: -15547761.0, we would expect zero.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#Who in the data has a line that isn&#39;t balancing?</span>
@@ -13871,7 +13902,7 @@ The balanced stock data is: -15547761.0, we would expect zero.
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[11]:</div>
+<div class="prompt output_prompt">Out[12]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -13966,7 +13997,7 @@ The balanced stock data is: -15547761.0, we would expect zero.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#After a visual check, these two people are NOT reflecting what&#39;s in the FindLaw PDF of payments to insiders.</span>
@@ -14005,7 +14036,7 @@ The balanced stock data is: -15547761.0, we would expect zero.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span> <span class="s1">&#39;Semi-manually adjusting financials for {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">employees</span><span class="p">[</span><span class="mi">118</span><span class="p">])</span>
@@ -14045,7 +14076,7 @@ The balanced stock data is: -15547761.0, we would expect zero.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#Check the stock balancing now that we&#39;ve adjusted some figures:</span>
@@ -14100,7 +14131,7 @@ The balanced stock data is now: 0.0, we would expect zero.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#Let&#39;s do the same check for total payments:</span>
@@ -14134,7 +14165,7 @@ The balanced stock data is now: 0.0, we would expect zero.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#Because the data was gathered as part of a lawsuit, we can safely assume that any NaN values in the financial fields had no related payments.</span>
@@ -14149,7 +14180,7 @@ The balanced stock data is now: 0.0, we would expect zero.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#Quick visual check for outliers</span>
@@ -14170,7 +14201,7 @@ The balanced stock data is now: 0.0, we would expect zero.
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[17]:</div>
+<div class="prompt output_prompt">Out[18]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -14185,7 +14216,7 @@ The balanced stock data is now: 0.0, we would expect zero.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">outlier_salary_bonus</span> <span class="o">=</span> <span class="p">{</span>
@@ -14207,7 +14238,7 @@ The balanced stock data is now: 0.0, we would expect zero.
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[18]:</div>
+<div class="prompt output_prompt">Out[19]:</div>
 
 
 
@@ -14243,7 +14274,7 @@ The balanced stock data is now: 0.0, we would expect zero.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#get the total line out of _everything_.</span>
@@ -14262,7 +14293,7 @@ The balanced stock data is now: 0.0, we would expect zero.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#Now that we&#39;ve seen a &quot;total&quot; record, let&#39;s manually check names to see who else we have present:</span>
@@ -14437,7 +14468,7 @@ GLISAN JR BEN F
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#&quot;THE TRAVEL AGENCY IN THE PARK&quot; is clearly not a person.  Let&#39;s drop it.</span>
@@ -14457,7 +14488,7 @@ GLISAN JR BEN F
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#Re-run the visual check for outliers</span>
@@ -14478,7 +14509,7 @@ GLISAN JR BEN F
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[22]:</div>
+<div class="prompt output_prompt">Out[23]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -14493,7 +14524,7 @@ GLISAN JR BEN F
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#We have a person at 0,0?  </span>
@@ -14515,7 +14546,7 @@ GLISAN JR BEN F
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[23]:</div>
+<div class="prompt output_prompt">Out[24]:</div>
 
 
 
@@ -14551,7 +14582,7 @@ GLISAN JR BEN F
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#&quot;Eugene Lockhart&quot; has no values.  Dropping.</span>
@@ -14571,7 +14602,7 @@ GLISAN JR BEN F
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#Add a new column, total_compensation, to summarize the overall compensation someone&#39;s getting from the company.</span>
@@ -14597,7 +14628,7 @@ GLISAN JR BEN F
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#Fun with Graphs: total_payments+total_stock_value with Employee Names included</span>
@@ -14629,7 +14660,7 @@ GLISAN JR BEN F
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[26]:</div>
+<div class="prompt output_prompt">Out[27]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -14644,7 +14675,7 @@ GLISAN JR BEN F
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#What if it&#39;s just salary and bonus?</span>
@@ -14671,7 +14702,7 @@ GLISAN JR BEN F
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[27]:</div>
+<div class="prompt output_prompt">Out[28]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -14686,7 +14717,7 @@ GLISAN JR BEN F
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#simple/beautiful outlier detection function from https://github.com/joferkington/oost_paper_code/blob/master/utilities.py</span>
@@ -14732,7 +14763,7 @@ GLISAN JR BEN F
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#Let&#39;s mark the people who are extremely well paid</span>
@@ -14746,7 +14777,7 @@ GLISAN JR BEN F
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[30]:</div>
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#visual check of the z-score method</span>
@@ -14772,7 +14803,7 @@ GLISAN JR BEN F
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[30]:</div>
+<div class="prompt output_prompt">Out[31]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -14787,7 +14818,7 @@ GLISAN JR BEN F
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#Quick check of how many persons of interest were and weren&#39;t in our exceptionally well-paid category</span>
@@ -14805,7 +14836,7 @@ GLISAN JR BEN F
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[31]:</div>
+<div class="prompt output_prompt">Out[32]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -14860,7 +14891,7 @@ GLISAN JR BEN F
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[32]:</div>
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#convert the dataframe back into a dictionary</span>
@@ -14874,7 +14905,7 @@ GLISAN JR BEN F
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># #First, we&#39;ll do a basic check to see how much overall compensation could predict whether someone&#39;s a poi</span>
@@ -14938,14 +14969,14 @@ GLISAN JR BEN F
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>training time: 0.001 s
+<pre>training time: 0.002 s
 [ 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.
   0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.]
-prediction time: 0.002 s
+prediction time: 0.001 s
 0.944444444444
 accuracy time: 0.0 s
 0.0
-recall time: 0.001 s
+recall time: 0.002 s
 There are 34 True Negatives, 0 False Positives, 2 False Negatives, and 0 True Positives
 </pre>
 </div>
@@ -14957,7 +14988,7 @@ There are 34 True Negatives, 0 False Positives, 2 False Negatives, and 0 True Po
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[34]:</div>
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># #TODO: Consider making graph of actual y/n poi on left, predicted y/n poi on right</span>
@@ -14980,7 +15011,7 @@ There are 34 True Negatives, 0 False Positives, 2 False Negatives, and 0 True Po
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[35]:</div>
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#How often were persons of interest emailing each other?</span>
@@ -15006,7 +15037,7 @@ There are 34 True Negatives, 0 False Positives, 2 False Negatives, and 0 True Po
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[35]:</div>
+<div class="prompt output_prompt">Out[36]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -15021,7 +15052,7 @@ There are 34 True Negatives, 0 False Positives, 2 False Negatives, and 0 True Po
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[36]:</div>
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">scaler</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
@@ -15042,7 +15073,7 @@ There are 34 True Negatives, 0 False Positives, 2 False Negatives, and 0 True Po
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#How often were persons of interest emailing each other?</span>
@@ -15068,7 +15099,7 @@ There are 34 True Negatives, 0 False Positives, 2 False Negatives, and 0 True Po
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[37]:</div>
+<div class="prompt output_prompt">Out[38]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -15083,7 +15114,7 @@ There are 34 True Negatives, 0 False Positives, 2 False Negatives, and 0 True Po
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[38]:</div>
+<div class="prompt input_prompt">In&nbsp;[39]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#That was interesting to see, but shouldn&#39;t be used for testing -- we don&#39;t want to scale based on all data points</span>
@@ -15099,7 +15130,7 @@ There are 34 True Negatives, 0 False Positives, 2 False Negatives, and 0 True Po
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[39]:</div>
+<div class="prompt input_prompt">In&nbsp;[40]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#convert the dataframe back into a dictionary</span>
@@ -15113,7 +15144,7 @@ There are 34 True Negatives, 0 False Positives, 2 False Negatives, and 0 True Po
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[40]:</div>
+<div class="prompt input_prompt">In&nbsp;[41]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">features_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;poi&#39;</span><span class="p">,</span> <span class="s1">&#39;from_poi_to_this_person&#39;</span><span class="p">,</span> <span class="s1">&#39;from_this_person_to_poi&#39;</span><span class="p">]</span>
@@ -15127,7 +15158,7 @@ There are 34 True Negatives, 0 False Positives, 2 False Negatives, and 0 True Po
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[41]:</div>
+<div class="prompt input_prompt">In&nbsp;[42]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">features_train_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">features_train</span><span class="p">)</span>
@@ -15141,7 +15172,7 @@ There are 34 True Negatives, 0 False Positives, 2 False Negatives, and 0 True Po
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[42]:</div>
+<div class="prompt input_prompt">In&nbsp;[43]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#create &amp; fit PCA</span>
@@ -15163,7 +15194,7 @@ There are 34 True Negatives, 0 False Positives, 2 False Negatives, and 0 True Po
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>done in 0.002s
+<pre>done in 0.032s
 </pre>
 </div>
 </div>
@@ -15174,7 +15205,7 @@ There are 34 True Negatives, 0 False Positives, 2 False Negatives, and 0 True Po
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[43]:</div>
+<div class="prompt input_prompt">In&nbsp;[44]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">features_train_transformed</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">features_train_scaled</span><span class="p">)</span>
@@ -15188,7 +15219,7 @@ There are 34 True Negatives, 0 False Positives, 2 False Negatives, and 0 True Po
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[44]:</div>
+<div class="prompt input_prompt">In&nbsp;[45]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Predict without scaling or PCA&#39;</span><span class="p">)</span>
@@ -15213,9 +15244,9 @@ training time: 0.001 s
   0.  0.]
 prediction time: 0.001 s
 0.85
-accuracy time: 0.0 s
+accuracy time: 0.002 s
 0.0
-recall time: 0.001 s
+recall time: 0.002 s
 There are 17 True Negatives, 0 False Positives, 3 False Negatives, and 0 True Positives
 </pre>
 </div>
@@ -15227,7 +15258,7 @@ There are 17 True Negatives, 0 False Positives, 3 False Negatives, and 0 True Po
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[45]:</div>
+<div class="prompt input_prompt">In&nbsp;[46]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Predict with scaling only&#39;</span><span class="p">)</span>
@@ -15248,12 +15279,12 @@ There are 17 True Negatives, 0 False Positives, 3 False Negatives, and 0 True Po
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Predict with scaling only
-training time: 0.002 s
+training time: 0.003 s
 [ 0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.
   0.  0.]
 prediction time: 0.001 s
 0.8
-accuracy time: 0.0 s
+accuracy time: 0.001 s
 0.0
 recall time: 0.002 s
 There are 16 True Negatives, 1 False Positives, 3 False Negatives, and 0 True Positives
@@ -15267,7 +15298,7 @@ There are 16 True Negatives, 1 False Positives, 3 False Negatives, and 0 True Po
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[46]:</div>
+<div class="prompt input_prompt">In&nbsp;[47]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Predict with scaling and PCA&#39;</span><span class="p">)</span>
@@ -15288,12 +15319,12 @@ There are 16 True Negatives, 1 False Positives, 3 False Negatives, and 0 True Po
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Predict with scaling and PCA
-training time: 0.003 s
+training time: 0.002 s
 [ 0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.
   0.  0.]
 prediction time: 0.001 s
 0.8
-accuracy time: 0.0 s
+accuracy time: 0.001 s
 0.0
 recall time: 0.001 s
 There are 16 True Negatives, 1 False Positives, 3 False Negatives, and 0 True Positives
@@ -15328,7 +15359,7 @@ I'm specifically interested in how often persons of interest emailed the higher-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[47]:</div>
+<div class="prompt input_prompt">In&nbsp;[48]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">features_list</span> <span class="o">=</span> <span class="p">[</span>
@@ -15345,7 +15376,7 @@ I'm specifically interested in how often persons of interest emailed the higher-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="prompt input_prompt">In&nbsp;[49]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Predict using total payments, total stock, from poi, to poi&#39;</span><span class="p">)</span>
@@ -15365,14 +15396,14 @@ I'm specifically interested in how often persons of interest emailed the higher-
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Predict using total payments, total stock, from poi, to poi
-training time: 0.001 s
+training time: 0.002 s
 [ 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.
   0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.]
-prediction time: 0.001 s
+prediction time: 0.002 s
 0.944444444444
 accuracy time: 0.0 s
 0.0
-recall time: 0.001 s
+recall time: 0.002 s
 There are 34 True Negatives, 0 False Positives, 2 False Negatives, and 0 True Positives
 </pre>
 </div>
@@ -15394,7 +15425,7 @@ There are 34 True Negatives, 0 False Positives, 2 False Negatives, and 0 True Po
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[49]:</div>
+<div class="prompt input_prompt">In&nbsp;[50]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#Let&#39;s try selecting features based on the financial features and connectivity / how often the person sent poi emails</span>
@@ -15414,7 +15445,7 @@ There are 34 True Negatives, 0 False Positives, 2 False Negatives, and 0 True Po
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[50]:</div>
+<div class="prompt input_prompt">In&nbsp;[51]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">features_selected</span> <span class="o">=</span> <span class="p">[</span>
@@ -15459,7 +15490,7 @@ There are 34 True Negatives, 0 False Positives, 2 False Negatives, and 0 True Po
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[51]:</div>
+<div class="prompt input_prompt">In&nbsp;[52]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span> <span class="s1">&#39;Looking at the f score for each to validate that our selected scores had significantly higher scores than non-selected&#39;</span>
@@ -15486,7 +15517,7 @@ There are 34 True Negatives, 0 False Positives, 2 False Negatives, and 0 True Po
 </div>
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[51]:</div>
+<div class="prompt output_prompt">Out[52]:</div>
 
 
 
@@ -15505,7 +15536,7 @@ There are 34 True Negatives, 0 False Positives, 2 False Negatives, and 0 True Po
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[52]:</div>
+<div class="prompt input_prompt">In&nbsp;[53]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">create_test_split</span><span class="p">(</span><span class="n">features_list</span><span class="p">)</span>
@@ -15540,7 +15571,7 @@ There are 34 True Negatives, 0 False Positives, 2 False Negatives, and 0 True Po
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>The best parameters are: {&#39;linearsvc__C&#39;: 37, &#39;pca__n_components&#39;: 13, &#39;pca__svd_solver&#39;: &#39;arpack&#39;}
+<pre>The best parameters are: {&#39;linearsvc__C&#39;: 52, &#39;pca__n_components&#39;: 13, &#39;pca__svd_solver&#39;: &#39;arpack&#39;}
 </pre>
 </div>
 </div>
@@ -15551,7 +15582,7 @@ There are 34 True Negatives, 0 False Positives, 2 False Negatives, and 0 True Po
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[53]:</div>
+<div class="prompt input_prompt">In&nbsp;[54]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span> <span class="n">test_classifier</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">my_dataset</span><span class="p">,</span> <span class="n">features_list</span><span class="p">)</span>
@@ -15570,11 +15601,11 @@ There are 34 True Negatives, 0 False Positives, 2 False Negatives, and 0 True Po
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Pipeline(steps=[(&#39;minmaxscaler&#39;, MinMaxScaler(copy=True, feature_range=(0, 1))), (&#39;pca&#39;, PCA(copy=True, iterated_power=&#39;auto&#39;, n_components=13, random_state=None,
-  svd_solver=&#39;arpack&#39;, tol=0.0, whiten=False)), (&#39;linearsvc&#39;, LinearSVC(C=37, class_weight=None, dual=True, fit_intercept=True,
+  svd_solver=&#39;arpack&#39;, tol=0.0, whiten=False)), (&#39;linearsvc&#39;, LinearSVC(C=52, class_weight=None, dual=True, fit_intercept=True,
      intercept_sca...=100, presort=&#39;auto&#39;, random_state=None,
               subsample=1.0, verbose=0, warm_start=False))])
-	Accuracy: 0.83193	Precision: 0.30888	Recall: 0.21050	F1: 0.25037	F2: 0.22482
-	Total predictions: 15000	True positives:  421	False positives:  942	False negatives: 1579	True negatives: 12058
+	Accuracy: 0.83193	Precision: 0.30661	Recall: 0.20650	F1: 0.24679	F2: 0.22093
+	Total predictions: 15000	True positives:  413	False positives:  934	False negatives: 1587	True negatives: 12066
 
 None
 </pre>
@@ -15587,7 +15618,7 @@ None
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[54]:</div>
+<div class="prompt input_prompt">In&nbsp;[55]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">create_test_split</span><span class="p">(</span><span class="n">features_list</span><span class="p">)</span>
@@ -15633,7 +15664,7 @@ None
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[55]:</div>
+<div class="prompt input_prompt">In&nbsp;[56]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span> <span class="n">test_classifier</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">my_dataset</span><span class="p">,</span> <span class="n">features_list</span><span class="p">)</span>
@@ -15655,8 +15686,8 @@ None
   svd_solver=&#39;full&#39;, tol=0.0, whiten=False)), (&#39;linearsvc&#39;, LinearSVC(C=5, class_weight=None, dual=True, fit_intercept=True,
      intercept_scalin...=100, presort=&#39;auto&#39;, random_state=None,
               subsample=1.0, verbose=0, warm_start=False))])
-	Accuracy: 0.83233	Precision: 0.31327	Recall: 0.21600	F1: 0.25570	F2: 0.23030
-	Total predictions: 15000	True positives:  432	False positives:  947	False negatives: 1568	True negatives: 12053
+	Accuracy: 0.83240	Precision: 0.31295	Recall: 0.21500	F1: 0.25489	F2: 0.22936
+	Total predictions: 15000	True positives:  430	False positives:  944	False negatives: 1570	True negatives: 12056
 
 None
 </pre>
@@ -15669,7 +15700,7 @@ None
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[56]:</div>
+<div class="prompt input_prompt">In&nbsp;[57]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">create_test_split</span><span class="p">(</span><span class="n">features_list</span><span class="p">)</span>
@@ -15715,7 +15746,7 @@ None
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[57]:</div>
+<div class="prompt input_prompt">In&nbsp;[58]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span> <span class="n">test_classifier</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">my_dataset</span><span class="p">,</span> <span class="n">features_list</span><span class="p">)</span>
@@ -15733,11 +15764,11 @@ None
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Pipeline(steps=[(&#39;selectkbest&#39;, SelectKBest(k=12, score_func=&lt;function f_classif at 0x000000000DBABE48&gt;)), (&#39;adaboostclassifier&#39;, AdaBoostClassifier(algorithm=&#39;SAMME.R&#39;, base_estimator=None,
+<pre>Pipeline(steps=[(&#39;selectkbest&#39;, SelectKBest(k=12, score_func=&lt;function f_classif at 0x000000000DB91E48&gt;)), (&#39;adaboostclassifier&#39;, AdaBoostClassifier(algorithm=&#39;SAMME.R&#39;, base_estimator=None,
           learning_rate=0.70000000000000007, n_estimators=30,
           random_state=None))])
-	Accuracy: 0.85080	Precision: 0.42077	Recall: 0.31600	F1: 0.36094	F2: 0.33256
-	Total predictions: 15000	True positives:  632	False positives:  870	False negatives: 1368	True negatives: 12130
+	Accuracy: 0.85167	Precision: 0.42465	Recall: 0.31700	F1: 0.36301	F2: 0.33393
+	Total predictions: 15000	True positives:  634	False positives:  859	False negatives: 1366	True negatives: 12141
 
 None
 </pre>
@@ -15750,7 +15781,7 @@ None
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[58]:</div>
+<div class="prompt input_prompt">In&nbsp;[59]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#Add scaling</span>
@@ -15796,7 +15827,7 @@ None
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[59]:</div>
+<div class="prompt input_prompt">In&nbsp;[60]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">clf</span>
@@ -15811,12 +15842,12 @@ None
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[59]:</div>
+<div class="prompt output_prompt">Out[60]:</div>
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>Pipeline(steps=[(&#39;minmaxscaler&#39;, MinMaxScaler(copy=True, feature_range=(0, 1))), (&#39;selectkbest&#39;, SelectKBest(k=12, score_func=&lt;function f_classif at 0x000000000DBABE48&gt;)), (&#39;adaboostclassifier&#39;, AdaBoostClassifier(algorithm=&#39;SAMME.R&#39;, base_estimator=None,
+<pre>Pipeline(steps=[(&#39;minmaxscaler&#39;, MinMaxScaler(copy=True, feature_range=(0, 1))), (&#39;selectkbest&#39;, SelectKBest(k=12, score_func=&lt;function f_classif at 0x000000000DB91E48&gt;)), (&#39;adaboostclassifier&#39;, AdaBoostClassifier(algorithm=&#39;SAMME.R&#39;, base_estimator=None,
           learning_rate=0.70000000000000007, n_estimators=30,
           random_state=None))])</pre>
 </div>
@@ -15829,7 +15860,7 @@ None
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[60]:</div>
+<div class="prompt input_prompt">In&nbsp;[61]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">features_selected</span> <span class="o">=</span> <span class="p">[</span>
@@ -15865,7 +15896,7 @@ None
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[61]:</div>
+<div class="prompt input_prompt">In&nbsp;[62]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span> <span class="s1">&#39;Looking at the f score for each to validate that our selected scores had significantly higher scores than non-selected&#39;</span>
@@ -15892,7 +15923,7 @@ None
 </div>
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[61]:</div>
+<div class="prompt output_prompt">Out[62]:</div>
 
 
 
@@ -15911,7 +15942,7 @@ None
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[62]:</div>
+<div class="prompt input_prompt">In&nbsp;[63]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span> <span class="n">test_classifier</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">my_dataset</span><span class="p">,</span> <span class="n">features_list</span><span class="p">)</span>
@@ -15929,11 +15960,11 @@ None
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Pipeline(steps=[(&#39;minmaxscaler&#39;, MinMaxScaler(copy=True, feature_range=(0, 1))), (&#39;selectkbest&#39;, SelectKBest(k=12, score_func=&lt;function f_classif at 0x000000000DBABE48&gt;)), (&#39;adaboostclassifier&#39;, AdaBoostClassifier(algorithm=&#39;SAMME.R&#39;, base_estimator=None,
+<pre>Pipeline(steps=[(&#39;minmaxscaler&#39;, MinMaxScaler(copy=True, feature_range=(0, 1))), (&#39;selectkbest&#39;, SelectKBest(k=12, score_func=&lt;function f_classif at 0x000000000DB91E48&gt;)), (&#39;adaboostclassifier&#39;, AdaBoostClassifier(algorithm=&#39;SAMME.R&#39;, base_estimator=None,
           learning_rate=0.70000000000000007, n_estimators=30,
           random_state=None))])
-	Accuracy: 0.85147	Precision: 0.42369	Recall: 0.31650	F1: 0.36234	F2: 0.33337
-	Total predictions: 15000	True positives:  633	False positives:  861	False negatives: 1367	True negatives: 12139
+	Accuracy: 0.85140	Precision: 0.42362	Recall: 0.31750	F1: 0.36296	F2: 0.33425
+	Total predictions: 15000	True positives:  635	False positives:  864	False negatives: 1365	True negatives: 12136
 
 None
 </pre>
@@ -15946,7 +15977,7 @@ None
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[63]:</div>
+<div class="prompt input_prompt">In&nbsp;[64]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">dump_classifier_and_data</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">my_dataset</span><span class="p">,</span> <span class="n">features_list</span><span class="p">)</span>
@@ -15959,7 +15990,7 @@ None
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[64]:</div>
+<div class="prompt input_prompt">In&nbsp;[65]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#Future possibility, elephant is too large for scope right now: Consider checking for -- is there a group of words where the poi to poi emails [no non-pois in email?] had a higher usage</span>
